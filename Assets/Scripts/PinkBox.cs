@@ -6,82 +6,84 @@ using UnityEngine.InputSystem;
 
 public class PinkBox : MonoBehaviour
 {
-    private InputMaster inputMaster;
-    private CharacterController charControl;
-    private float gravStrength = 8;
-    private float verticalVelocity;
-    private Vector3 finalMoveDir;
-    private bool _queueJump;
+    const float GravityStrength = 8;
+
+    public float JumpPower = 5;
+    public float MoveSpeed = 5;
+
+    public InputMaster InputMaster;
+    private CharacterController CharControl;
+    
+    private float verticalMotion;
+    private Vector3 charVelocity;
+    private bool queueJump;
 
     void Awake()
     {
-        inputMaster = new InputMaster();
-        charControl = GetComponent<CharacterController>();
+        InputMaster = new InputMaster();
+        CharControl = GetComponent<CharacterController>();
 
-        inputMaster.Enable();
-        inputMaster.Movement.Jump.performed += ctx => QueueJump();
+        InputMaster.Enable();
+        InputMaster.Movement.Jump.performed += ctx => QueueJump(ctx);
     }
 
     void Update()
     {
-        finalMoveDir = new Vector3();
+        charVelocity = Vector3.zero;
         
-        // State altering stuff
-        ApplyHPlaneMovement();
         ApplyGravity();
+        ApplyHPlaneMovement();
         ApplyJump();
 
-        // Extra maths
-        finalMoveDir.y = verticalVelocity * Time.deltaTime;
-
         // Thou shalt not apply deltaTime in vain
-        charControl.Move(finalMoveDir);
+        CharControl.Move(charVelocity);
     }
 
     void ApplyHPlaneMovement()
     {
-        Vector2 HPlaneDir = inputMaster.FindAction("HPlaneMovement").ReadValue<Vector2>().normalized;
+        Vector2 HPlaneDir = InputMaster.FindAction("HPlaneMovement").ReadValue<Vector2>().normalized;
 
         if (HPlaneDir.magnitude > 0.1)
         {
-            finalMoveDir += new Vector3(HPlaneDir.x, 0f, HPlaneDir.y) * 5 * Time.deltaTime;
+            charVelocity += new Vector3(HPlaneDir.x, 0f, HPlaneDir.y) * MoveSpeed * Time.deltaTime;
         }
     }
 
     void ApplyGravity()
     {
-        if (charControl.isGrounded)
+        if (CharControl.isGrounded)
         {
-            verticalVelocity = -1f;
+            verticalMotion = -1f;
         }
         else
         {
-            verticalVelocity -= gravStrength * Time.deltaTime;
+            verticalMotion -= GravityStrength * Time.deltaTime;
         }
+
+        charVelocity.y = verticalMotion * Time.deltaTime;
     }
 
     void ApplyJump()
     {
-        if (!_queueJump)
+        if (!queueJump)
         {
             return;
         }
 
-        verticalVelocity = 5;
-
-        _queueJump = false;
+        charVelocity.y += JumpPower * Time.deltaTime;
+        verticalMotion = JumpPower;
+        queueJump = false;
     }
 
-    void QueueJump()
+    void QueueJump(InputAction.CallbackContext ctx)
     {
-        if (charControl.isGrounded)
-        {
-            _queueJump = true;
-        }
+        if (!CharControl.isGrounded) return;
+        queueJump = true;
     }
 
     void OnDisable()
     {
-        inputMaster.Disable();
+        if (InputMaster is null) return;
+        InputMaster.Disable();
     }
 }
