@@ -28,13 +28,13 @@ public partial class @InputMaster: IInputActionCollection2, IDisposable
             ""id"": ""b067c559-7769-47a2-871c-0db242ed8310"",
             ""actions"": [
                 {
-                    ""name"": ""PlaneMovement"",
-                    ""type"": ""Button"",
+                    ""name"": ""HPlaneMovement"",
+                    ""type"": ""Value"",
                     ""id"": ""64baebde-3b1b-43d1-8a25-5e71f171eb10"",
-                    ""expectedControlType"": ""Button"",
+                    ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
                     ""interactions"": """",
-                    ""initialStateCheck"": false
+                    ""initialStateCheck"": true
                 },
                 {
                     ""name"": ""Jump"",
@@ -48,68 +48,57 @@ public partial class @InputMaster: IInputActionCollection2, IDisposable
             ],
             ""bindings"": [
                 {
-                    ""name"": ""NorthSouth"",
-                    ""id"": ""b52c0a03-34d4-43cd-9603-5dff63824687"",
-                    ""path"": ""1DAxis"",
+                    ""name"": ""2D Vector"",
+                    ""id"": ""21385480-2663-42bc-91ad-048cf95ab60f"",
+                    ""path"": ""2DVector"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""PlaneMovement"",
+                    ""action"": ""HPlaneMovement"",
                     ""isComposite"": true,
                     ""isPartOfComposite"": false
                 },
                 {
-                    ""name"": ""negative"",
-                    ""id"": ""9179b2cf-33c1-4f95-b0bc-20f75b96fa4d"",
-                    ""path"": ""<Keyboard>/downArrow"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""KB"",
-                    ""action"": ""PlaneMovement"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""positive"",
-                    ""id"": ""0915b075-5b2d-47f0-a32f-7a64ea5fae8c"",
+                    ""name"": ""up"",
+                    ""id"": ""fa428a9e-bae0-4ec4-b3b8-d2e80ddd623b"",
                     ""path"": ""<Keyboard>/upArrow"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""KB"",
-                    ""action"": ""PlaneMovement"",
+                    ""groups"": """",
+                    ""action"": ""HPlaneMovement"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
                 {
-                    ""name"": ""EastWest"",
-                    ""id"": ""6622d582-8ce9-4ea4-89f0-523edea1f06a"",
-                    ""path"": ""1DAxis"",
+                    ""name"": ""down"",
+                    ""id"": ""f6dcd2fa-e754-45f2-b68f-42dc4c83eff4"",
+                    ""path"": ""<Keyboard>/downArrow"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""PlaneMovement"",
-                    ""isComposite"": true,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": ""negative"",
-                    ""id"": ""d04bcbc7-1121-421c-b62d-fd6753190c91"",
-                    ""path"": ""<Keyboard>/leftArrow"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""KB"",
-                    ""action"": ""PlaneMovement"",
+                    ""action"": ""HPlaneMovement"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
                 {
-                    ""name"": ""positive"",
-                    ""id"": ""7d41d31d-c4d8-481b-989f-26c2c14944dd"",
+                    ""name"": ""left"",
+                    ""id"": ""a9a460ad-17ad-47bd-af33-1ec9f98a6fe7"",
+                    ""path"": ""<Keyboard>/leftArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""HPlaneMovement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""d0a77e9c-7252-4476-91fd-a6ca6052c285"",
                     ""path"": ""<Keyboard>/rightArrow"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""KB"",
-                    ""action"": ""PlaneMovement"",
+                    ""groups"": """",
+                    ""action"": ""HPlaneMovement"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
@@ -143,7 +132,7 @@ public partial class @InputMaster: IInputActionCollection2, IDisposable
 }");
         // Movement
         m_Movement = asset.FindActionMap("Movement", throwIfNotFound: true);
-        m_Movement_PlaneMovement = m_Movement.FindAction("PlaneMovement", throwIfNotFound: true);
+        m_Movement_HPlaneMovement = m_Movement.FindAction("HPlaneMovement", throwIfNotFound: true);
         m_Movement_Jump = m_Movement.FindAction("Jump", throwIfNotFound: true);
     }
 
@@ -206,13 +195,13 @@ public partial class @InputMaster: IInputActionCollection2, IDisposable
     // Movement
     private readonly InputActionMap m_Movement;
     private List<IMovementActions> m_MovementActionsCallbackInterfaces = new List<IMovementActions>();
-    private readonly InputAction m_Movement_PlaneMovement;
+    private readonly InputAction m_Movement_HPlaneMovement;
     private readonly InputAction m_Movement_Jump;
     public struct MovementActions
     {
         private @InputMaster m_Wrapper;
         public MovementActions(@InputMaster wrapper) { m_Wrapper = wrapper; }
-        public InputAction @PlaneMovement => m_Wrapper.m_Movement_PlaneMovement;
+        public InputAction @HPlaneMovement => m_Wrapper.m_Movement_HPlaneMovement;
         public InputAction @Jump => m_Wrapper.m_Movement_Jump;
         public InputActionMap Get() { return m_Wrapper.m_Movement; }
         public void Enable() { Get().Enable(); }
@@ -223,9 +212,9 @@ public partial class @InputMaster: IInputActionCollection2, IDisposable
         {
             if (instance == null || m_Wrapper.m_MovementActionsCallbackInterfaces.Contains(instance)) return;
             m_Wrapper.m_MovementActionsCallbackInterfaces.Add(instance);
-            @PlaneMovement.started += instance.OnPlaneMovement;
-            @PlaneMovement.performed += instance.OnPlaneMovement;
-            @PlaneMovement.canceled += instance.OnPlaneMovement;
+            @HPlaneMovement.started += instance.OnHPlaneMovement;
+            @HPlaneMovement.performed += instance.OnHPlaneMovement;
+            @HPlaneMovement.canceled += instance.OnHPlaneMovement;
             @Jump.started += instance.OnJump;
             @Jump.performed += instance.OnJump;
             @Jump.canceled += instance.OnJump;
@@ -233,9 +222,9 @@ public partial class @InputMaster: IInputActionCollection2, IDisposable
 
         private void UnregisterCallbacks(IMovementActions instance)
         {
-            @PlaneMovement.started -= instance.OnPlaneMovement;
-            @PlaneMovement.performed -= instance.OnPlaneMovement;
-            @PlaneMovement.canceled -= instance.OnPlaneMovement;
+            @HPlaneMovement.started -= instance.OnHPlaneMovement;
+            @HPlaneMovement.performed -= instance.OnHPlaneMovement;
+            @HPlaneMovement.canceled -= instance.OnHPlaneMovement;
             @Jump.started -= instance.OnJump;
             @Jump.performed -= instance.OnJump;
             @Jump.canceled -= instance.OnJump;
@@ -267,7 +256,7 @@ public partial class @InputMaster: IInputActionCollection2, IDisposable
     }
     public interface IMovementActions
     {
-        void OnPlaneMovement(InputAction.CallbackContext context);
+        void OnHPlaneMovement(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
     }
 }
