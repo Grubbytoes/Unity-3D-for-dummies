@@ -28,7 +28,7 @@ public partial class @InputMaster: IInputActionCollection2, IDisposable
             ""id"": ""b067c559-7769-47a2-871c-0db242ed8310"",
             ""actions"": [
                 {
-                    ""name"": ""HPlaneMovement"",
+                    ""name"": ""HorizontalMovement"",
                     ""type"": ""Value"",
                     ""id"": ""64baebde-3b1b-43d1-8a25-5e71f171eb10"",
                     ""expectedControlType"": ""Vector2"",
@@ -54,7 +54,7 @@ public partial class @InputMaster: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""HPlaneMovement"",
+                    ""action"": ""HorizontalMovement"",
                     ""isComposite"": true,
                     ""isPartOfComposite"": false
                 },
@@ -65,7 +65,7 @@ public partial class @InputMaster: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""HPlaneMovement"",
+                    ""action"": ""HorizontalMovement"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
@@ -76,7 +76,7 @@ public partial class @InputMaster: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""HPlaneMovement"",
+                    ""action"": ""HorizontalMovement"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
@@ -87,7 +87,7 @@ public partial class @InputMaster: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""HPlaneMovement"",
+                    ""action"": ""HorizontalMovement"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
@@ -98,7 +98,7 @@ public partial class @InputMaster: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""HPlaneMovement"",
+                    ""action"": ""HorizontalMovement"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
@@ -132,7 +132,7 @@ public partial class @InputMaster: IInputActionCollection2, IDisposable
 }");
         // Movement
         m_Movement = asset.FindActionMap("Movement", throwIfNotFound: true);
-        m_Movement_HPlaneMovement = m_Movement.FindAction("HPlaneMovement", throwIfNotFound: true);
+        m_Movement_HorizontalMovement = m_Movement.FindAction("HorizontalMovement", throwIfNotFound: true);
         m_Movement_Jump = m_Movement.FindAction("Jump", throwIfNotFound: true);
     }
 
@@ -195,13 +195,13 @@ public partial class @InputMaster: IInputActionCollection2, IDisposable
     // Movement
     private readonly InputActionMap m_Movement;
     private List<IMovementActions> m_MovementActionsCallbackInterfaces = new List<IMovementActions>();
-    private readonly InputAction m_Movement_HPlaneMovement;
+    private readonly InputAction m_Movement_HorizontalMovement;
     private readonly InputAction m_Movement_Jump;
     public struct MovementActions
     {
         private @InputMaster m_Wrapper;
         public MovementActions(@InputMaster wrapper) { m_Wrapper = wrapper; }
-        public InputAction @HPlaneMovement => m_Wrapper.m_Movement_HPlaneMovement;
+        public InputAction @HorizontalMovement => m_Wrapper.m_Movement_HorizontalMovement;
         public InputAction @Jump => m_Wrapper.m_Movement_Jump;
         public InputActionMap Get() { return m_Wrapper.m_Movement; }
         public void Enable() { Get().Enable(); }
@@ -212,9 +212,9 @@ public partial class @InputMaster: IInputActionCollection2, IDisposable
         {
             if (instance == null || m_Wrapper.m_MovementActionsCallbackInterfaces.Contains(instance)) return;
             m_Wrapper.m_MovementActionsCallbackInterfaces.Add(instance);
-            @HPlaneMovement.started += instance.OnHPlaneMovement;
-            @HPlaneMovement.performed += instance.OnHPlaneMovement;
-            @HPlaneMovement.canceled += instance.OnHPlaneMovement;
+            @HorizontalMovement.started += instance.OnHorizontalMovement;
+            @HorizontalMovement.performed += instance.OnHorizontalMovement;
+            @HorizontalMovement.canceled += instance.OnHorizontalMovement;
             @Jump.started += instance.OnJump;
             @Jump.performed += instance.OnJump;
             @Jump.canceled += instance.OnJump;
@@ -222,9 +222,9 @@ public partial class @InputMaster: IInputActionCollection2, IDisposable
 
         private void UnregisterCallbacks(IMovementActions instance)
         {
-            @HPlaneMovement.started -= instance.OnHPlaneMovement;
-            @HPlaneMovement.performed -= instance.OnHPlaneMovement;
-            @HPlaneMovement.canceled -= instance.OnHPlaneMovement;
+            @HorizontalMovement.started -= instance.OnHorizontalMovement;
+            @HorizontalMovement.performed -= instance.OnHorizontalMovement;
+            @HorizontalMovement.canceled -= instance.OnHorizontalMovement;
             @Jump.started -= instance.OnJump;
             @Jump.performed -= instance.OnJump;
             @Jump.canceled -= instance.OnJump;
@@ -256,7 +256,7 @@ public partial class @InputMaster: IInputActionCollection2, IDisposable
     }
     public interface IMovementActions
     {
-        void OnHPlaneMovement(InputAction.CallbackContext context);
+        void OnHorizontalMovement(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
     }
 }
