@@ -10,15 +10,14 @@ public class PinkBox : MonoBehaviour
     public float JumpPower = 5;
     public float MoveSpeed = 5;
 
-    private CharacterController CharControl; 
-
+    private CharacterController _charControl; 
     private Vector2 _horizontalInput;
     private float _verticalVelocity;
     private Vector3 _finalMovement;
 
     void Awake()
     {
-        CharControl = GetComponent<CharacterController>();
+        _charControl = GetComponent<CharacterController>();
     }
 
     void Update()
@@ -28,9 +27,22 @@ public class PinkBox : MonoBehaviour
         ApplyHorizontalMovement();
         ApplyGravity();
 
-        CharControl.Move(_finalMovement);
+        _charControl.Move(_finalMovement);
     }
 
+    public void Jump(InputAction.CallbackContext ctx)
+    {
+        if (!ctx.started || !_charControl.isGrounded) return;
+
+        _verticalVelocity = JumpPower;
+        _finalMovement.y += JumpPower * Time.deltaTime;
+    }
+
+    public void UpdateHorizontalInput(InputAction.CallbackContext ctx)
+    {
+        _horizontalInput = ctx.ReadValue<Vector2>();
+    }
+    
     private void ApplyHorizontalMovement()
     {
         var deltaSpeed = Time.deltaTime * MoveSpeed;
@@ -41,7 +53,7 @@ public class PinkBox : MonoBehaviour
 
     private void ApplyGravity()
     {
-        if (CharControl.isGrounded && _verticalVelocity < 0f)
+        if (_charControl.isGrounded && _verticalVelocity < 0f)
         {
             _verticalVelocity = -1;
         }
@@ -51,18 +63,5 @@ public class PinkBox : MonoBehaviour
         }
         
         _finalMovement.y += _verticalVelocity * Time.deltaTime;
-    }
-
-    public void Jump(InputAction.CallbackContext ctx)
-    {
-        if (!ctx.started || !CharControl.isGrounded) return;
-
-        _verticalVelocity = JumpPower;
-        _finalMovement.y += JumpPower * Time.deltaTime;
-    }
-
-    public void UpdateHorizontalInput(InputAction.CallbackContext ctx)
-    {
-        _horizontalInput = ctx.ReadValue<Vector2>();
     }
 }
