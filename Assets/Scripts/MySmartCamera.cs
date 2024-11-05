@@ -13,6 +13,7 @@ class MySmartCamera : MonoBehaviour
 
     public Transform Target;
     public float RecenterSpeed;
+    public float Dolly {get {return _targetOffset.magnitude;}}
 
     private Vector3 _targetOffset;
     private Vector3 _center;
@@ -34,7 +35,7 @@ class MySmartCamera : MonoBehaviour
 
         if (_offCenter.magnitude > 1)
         {
-            Move(_offCenter - _offCenter.normalized * 1);
+            AbsoluteMove(_offCenter - _offCenter.normalized * 1);
             _action = Action.RECENTER;
         }
         else if (_action == Action.FOLLOW) _action = Action.RECENTER;
@@ -43,7 +44,7 @@ class MySmartCamera : MonoBehaviour
         {
             Vector3 toMove = _offCenter;
             if (toMove.magnitude > RecenterSpeed) toMove = toMove.normalized * RecenterSpeed;
-            Move(toMove * Time.deltaTime);
+            AbsoluteMove(toMove * Time.deltaTime);
         }
         else
         {
@@ -51,7 +52,19 @@ class MySmartCamera : MonoBehaviour
         }
     }
 
-    private void Move(Vector3 toMove, float multiplier = 1)
+    void ExtendDolly(float amount, float multiplier = 1)
+    {
+        var toMove = _offCenter.normalized * amount * multiplier;
+        this.transform.position += toMove;
+    }
+
+    // TODO
+    void Orbit(Vector2 toOrbit, float multiplier = 1)
+    {
+        throw new NotImplementedException();
+    }
+
+    private void AbsoluteMove(Vector3 toMove, float multiplier = 1)
     {
         this.transform.position += toMove * multiplier;
         _center += toMove;
