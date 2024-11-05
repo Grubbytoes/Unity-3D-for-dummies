@@ -14,9 +14,12 @@ public class PinkBox : MonoBehaviour
     private Vector2 _horizontalInput;
     private float _verticalVelocity;
     private Vector3 _finalMovement;
+    private float _currentAngle;
+    private float _rotationalVelocity;
 
     void Awake()
     {
+        Debug.Log("beep");
         _charControl = GetComponent<CharacterController>();
     }
 
@@ -25,6 +28,7 @@ public class PinkBox : MonoBehaviour
         _finalMovement = Vector3.zero;
 
         ApplyHorizontalMovement();
+        ApplyRotation();
         ApplyGravity();
 
         _charControl.Move(_finalMovement);
@@ -43,6 +47,16 @@ public class PinkBox : MonoBehaviour
         _horizontalInput = ctx.ReadValue<Vector2>();
     }
     
+    public void ApplyRotation()
+    {
+        if (_horizontalInput.magnitude < 0.1f) return;
+
+        var targetAngle = Mathf.Atan2(_horizontalInput.x, _horizontalInput.y) * Mathf.Rad2Deg;
+        _currentAngle = Mathf.SmoothDamp(_currentAngle, targetAngle, ref _rotationalVelocity, 0.15f);
+
+        transform.rotation = Quaternion.Euler(0f, _currentAngle, 0f);
+    }
+
     private void ApplyHorizontalMovement()
     {
         var deltaSpeed = Time.deltaTime * MoveSpeed;
