@@ -46,6 +46,11 @@ public class PinkBox : MonoBehaviour, IPLayerChar
         _horizontalInput = ctx.ReadValue<Vector2>();
     }
     
+    public void OnCollect(Collectable c)
+    {
+        // TODO
+    }
+
     public void ApplyRotation()
     {
         if (_horizontalInput.magnitude < 0.1f) return;

@@ -1,7 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Playables;
 
 public class Collectable : MonoBehaviour
 {    
@@ -24,6 +21,7 @@ public class Collectable : MonoBehaviour
         var playerChar = other.GetComponent<IPLayerChar>();
         if (playerChar == null) return;
         
+        playerChar.OnCollect(this);
         OnCollectedBy(playerChar);
     }
 }

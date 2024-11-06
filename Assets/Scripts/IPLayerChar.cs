@@ -7,4 +7,5 @@ public interface IPLayerChar
     public abstract void UpdateHorizontalInput(InputAction.CallbackContext ctx);
 
     public abstract void Jump(InputAction.CallbackContext ctx);
+    public abstract void OnCollect(Collectable collectable);
 }
