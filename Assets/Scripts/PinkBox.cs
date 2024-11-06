@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PinkBox : MonoBehaviour
+public class PinkBox : MonoBehaviour, IPLayerChar
 {
     const float GravityStrength = 8;
     public float JumpPower = 5;
@@ -19,7 +19,6 @@ public class PinkBox : MonoBehaviour
 
     void Awake()
     {
-        Debug.Log("beep");
         _charControl = GetComponent<CharacterController>();
     }
 
