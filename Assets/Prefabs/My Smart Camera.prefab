@@ -107,7 +107,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Target: {fileID: 0}
-  RecenterSpeed: 0
+  RecenterSpeed: 1
 --- !u!114 &4785185305620856137
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -3268,6 +3268,10 @@ PrefabInstance:
       propertyPath: Target
       value: 
       objectReference: {fileID: 1911450055}
+    - target: {fileID: 6318681961037425425, guid: d635a24c60bad304395a001d9b8bb570, type: 3}
+      propertyPath: RecenterSpeed
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7334622891256133234, guid: d635a24c60bad304395a001d9b8bb570, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

@@ -14,9 +14,9 @@ class MySmartCamera : MonoBehaviour
 
     public Transform Target;
     public float RecenterSpeed;
-    public float Dolly { get { return _positionRToTarget.magnitude; } }
+    public float Dolly { get { return _positionRToMark.magnitude; } }
 
-    private Vector3 _positionRToTarget;
+    private Vector3 _positionRToMark;
     private Vector3 _targetMark;
     private Vector3 _targetOffMark;
     private Action _trackingAction;
@@ -26,7 +26,7 @@ class MySmartCamera : MonoBehaviour
     {
         _targetOffMark = Vector3.zero;
         _targetMark = Target.position;
-        _positionRToTarget = this.transform.position - Target.position;
+        _positionRToMark = this.transform.position - _targetMark;
         _trackingAction = Action.STILL;
     }
 
@@ -48,9 +48,16 @@ class MySmartCamera : MonoBehaviour
 
         if (_trackingAction == Action.RECENTER && _targetOffMark.magnitude > 0.1f)
         {
-            Vector3 toMove = _targetOffMark;
-            if (toMove.magnitude > RecenterSpeed) toMove = toMove.normalized * RecenterSpeed;
-            AbsoluteMove(toMove * Time.deltaTime);
+            var toMove = RecenterSpeed * Time.deltaTime;
+
+            if (_targetOffMark.magnitude < toMove)
+            {
+                AbsoluteMove(_targetOffMark);
+            }
+            else
+            {
+                AbsoluteMove(_targetOffMark.normalized * toMove);
+            }
         }
         else
         {
