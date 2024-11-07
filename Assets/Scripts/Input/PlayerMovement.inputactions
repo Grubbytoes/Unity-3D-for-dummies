@@ -1,5 +1,5 @@
 {
-    "name": "InputMaster",
+    "name": "PlayerMovement",
     "maps": [
         {
             "name": "Movement",
@@ -24,10 +24,10 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Orbit",
+                    "name": "CamControl",
                     "type": "Value",
-                    "id": "f2020c4d-0e76-4c61-98db-7c87868f3b78",
-                    "expectedControlType": "Axis",
+                    "id": "ecb634f1-310b-44ba-8d34-79ef10a779fc",
+                    "expectedControlType": "Vector2",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
@@ -112,65 +112,59 @@
                     "isPartOfComposite": false
                 },
                 {
-                    "name": "1D Axis",
-                    "id": "b6b142d6-423e-47a2-a4ee-24e48137af44",
-                    "path": "1DAxis",
+                    "name": "2D Vector",
+                    "id": "0ee93482-2ac7-4710-afe1-fce50f080846",
+                    "path": "2DVector",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Orbit",
+                    "action": "CamControl",
                     "isComposite": true,
                     "isPartOfComposite": false
                 },
                 {
-                    "name": "negative",
-                    "id": "396ed49b-22bb-41db-bb55-125dc90370b3",
-                    "path": "<Keyboard>/a",
+                    "name": "up",
+                    "id": "fc0437ca-8582-4926-9b80-f5192d029815",
+                    "path": "<Keyboard>/w",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Orbit",
+                    "action": "CamControl",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
                 {
-                    "name": "positive",
-                    "id": "65de2f05-3bb8-42f7-86c4-bbd354ed155a",
+                    "name": "down",
+                    "id": "590796d9-407c-41a6-ae3d-7953c3f6b930",
+                    "path": "<Keyboard>/s",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "CamControl",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "left",
+                    "id": "77ecf8e5-2a8d-4908-a66b-7adaffb30110",
+                    "path": "<Keyboard>/a",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "CamControl",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "right",
+                    "id": "ab11d854-d20e-458d-b835-69242d3af283",
                     "path": "<Keyboard>/d",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Orbit",
+                    "action": "CamControl",
                     "isComposite": false,
                     "isPartOfComposite": true
-                }
-            ]
-        },
-        {
-            "name": "Camera",
-            "id": "9307feb8-31e5-4e5a-8373-f10a9bbd48ed",
-            "actions": [
-                {
-                    "name": "New action",
-                    "type": "Button",
-                    "id": "40b41c30-c7f1-44ca-8dbb-e39d4c653f4f",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                }
-            ],
-            "bindings": [
-                {
-                    "name": "",
-                    "id": "943690f4-d903-416b-aa8a-f2de43d77454",
-                    "path": "",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "New action",
-                    "isComposite": false,
-                    "isPartOfComposite": false
                 }
             ]
         }

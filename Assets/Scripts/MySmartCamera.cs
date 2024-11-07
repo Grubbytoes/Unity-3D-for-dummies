@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.Controls;
 
 class MySmartCamera : MonoBehaviour
 {
@@ -19,6 +20,7 @@ class MySmartCamera : MonoBehaviour
     private Vector3 _center;
     private Vector3 _offCenter;
     private Action _action;
+    private Vector2 _controlDir;
 
     void Start()
     {
@@ -52,9 +54,9 @@ class MySmartCamera : MonoBehaviour
         }
     }
 
-    public void Orbit(InputAction.CallbackContext context)
+    public void UpdateControlDir(InputAction.CallbackContext context)
     {
-        Debug.Log("I should be orbiting!");
+        _controlDir = context.ReadValue<Vector2>();
     }
 
     void ExtendDolly(float amount, float multiplier = 1)

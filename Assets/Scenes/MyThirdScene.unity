@@ -2072,6 +2072,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3290994338874832122, guid: a0815cd5b37fd4cc2b07088beed47c4f, type: 3}
   m_PrefabInstance: {fileID: 1241474197}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1286871930 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6318681961037425425, guid: d635a24c60bad304395a001d9b8bb570, type: 3}
+  m_PrefabInstance: {fileID: 8725019212182579546}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eceed1f32c67780449f86c67ca7a7205, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!43 &1313111210
 Mesh:
   m_ObjectHideFlags: 0
@@ -3147,6 +3158,42 @@ PrefabInstance:
     - target: {fileID: 3660667854341027888, guid: 49885a71c32764ff2b82e6bf4a72b3a6, type: 3}
       propertyPath: m_Name
       value: PlaceholderChar
+      objectReference: {fileID: 0}
+    - target: {fileID: 5867580067281119389, guid: 49885a71c32764ff2b82e6bf4a72b3a6, type: 3}
+      propertyPath: m_ActionEvents.Array.data[2].m_ActionId
+      value: ecb634f1-310b-44ba-8d34-79ef10a779fc
+      objectReference: {fileID: 0}
+    - target: {fileID: 5867580067281119389, guid: 49885a71c32764ff2b82e6bf4a72b3a6, type: 3}
+      propertyPath: m_ActionEvents.Array.data[2].m_ActionName
+      value: Movement/CamXOrbit[/Keyboard/a,/Keyboard/d]
+      objectReference: {fileID: 0}
+    - target: {fileID: 5867580067281119389, guid: 49885a71c32764ff2b82e6bf4a72b3a6, type: 3}
+      propertyPath: m_ActionEvents.Array.data[2].m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5867580067281119389, guid: 49885a71c32764ff2b82e6bf4a72b3a6, type: 3}
+      propertyPath: m_ActionEvents.Array.data[2].m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5867580067281119389, guid: 49885a71c32764ff2b82e6bf4a72b3a6, type: 3}
+      propertyPath: m_ActionEvents.Array.data[2].m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1286871930}
+    - target: {fileID: 5867580067281119389, guid: 49885a71c32764ff2b82e6bf4a72b3a6, type: 3}
+      propertyPath: m_ActionEvents.Array.data[2].m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5867580067281119389, guid: 49885a71c32764ff2b82e6bf4a72b3a6, type: 3}
+      propertyPath: m_ActionEvents.Array.data[2].m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Orbit
+      objectReference: {fileID: 0}
+    - target: {fileID: 5867580067281119389, guid: 49885a71c32764ff2b82e6bf4a72b3a6, type: 3}
+      propertyPath: m_ActionEvents.Array.data[2].m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: MySmartCamera, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 5867580067281119389, guid: 49885a71c32764ff2b82e6bf4a72b3a6, type: 3}
+      propertyPath: m_ActionEvents.Array.data[2].m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 6506646916288031225, guid: 49885a71c32764ff2b82e6bf4a72b3a6, type: 3}
       propertyPath: m_LocalPosition.x
