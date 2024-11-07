@@ -13,7 +13,7 @@ class MySmartCamera : MonoBehaviour
 
     public Transform Target;
     public float RecenterSpeed;
-    public float Dolly {get {return _targetOffset.magnitude;}}
+    public float Dolly { get { return _targetOffset.magnitude; } }
 
     private Vector3 _targetOffset;
     private Vector3 _center;
@@ -52,16 +52,15 @@ class MySmartCamera : MonoBehaviour
         }
     }
 
+    public void Orbit(InputAction.CallbackContext context)
+    {
+        Debug.Log("I should be orbiting!");
+    }
+
     void ExtendDolly(float amount, float multiplier = 1)
     {
         var toMove = _offCenter.normalized * amount * multiplier;
         this.transform.position += toMove;
-    }
-
-    // TODO
-    void Orbit(Vector2 toOrbit, float multiplier = 1)
-    {
-        throw new NotImplementedException();
     }
 
     private void AbsoluteMove(Vector3 toMove, float multiplier = 1)
