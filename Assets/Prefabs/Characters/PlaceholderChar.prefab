@@ -433,9 +433,21 @@ MonoBehaviour:
     m_ActionId: 83a83f65-d14b-4140-b33d-ce0cfa3c82ca
     m_ActionName: Movement/Jump[/Keyboard/space]
   - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: f2020c4d-0e76-4c61-98db-7c87868f3b78
-    m_ActionName: Movement/Dolly[/Keyboard/alt]
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: ecb634f1-310b-44ba-8d34-79ef10a779fc
+    m_ActionName: Movement/CamControl[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: KB
   m_DefaultActionMap: Movement

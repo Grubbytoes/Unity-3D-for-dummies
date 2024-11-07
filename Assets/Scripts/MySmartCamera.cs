@@ -14,44 +14,54 @@ class MySmartCamera : MonoBehaviour
 
     public Transform Target;
     public float RecenterSpeed;
-    public float Dolly { get { return _targetOffset.magnitude; } }
+    public float Dolly { get { return _positionRToTarget.magnitude; } }
 
-    private Vector3 _targetOffset;
-    private Vector3 _center;
-    private Vector3 _offCenter;
-    private Action _action;
+    private Vector3 _positionRToTarget;
+    private Vector3 _targetMark;
+    private Vector3 _targetOffMark;
+    private Action _trackingAction;
     private Vector2 _controlDir;
 
     void Start()
     {
-        _offCenter = Vector3.zero;
-        _center = Target.position;
-        _targetOffset = this.transform.position - Target.position;
-        _action = Action.STILL;
+        _targetOffMark = Vector3.zero;
+        _targetMark = Target.position;
+        _positionRToTarget = this.transform.position - Target.position;
+        _trackingAction = Action.STILL;
     }
 
     void LateUpdate()
     {
-        // _offCenter always updates, don't worry!
-        _offCenter = Target.position - _center;
+        _targetOffMark = Target.position - _targetMark;
 
-        if (_offCenter.magnitude > 1)
+        TrackTarget();
+    }
+
+    void TrackTarget()
+    {
+        if (_targetOffMark.magnitude > 1)
         {
-            AbsoluteMove(_offCenter - _offCenter.normalized * 1);
-            _action = Action.RECENTER;
+            AbsoluteMove(_targetOffMark - _targetOffMark.normalized * 1);
+            _trackingAction = Action.RECENTER;
         }
-        else if (_action == Action.FOLLOW) _action = Action.RECENTER;
+        else if (_trackingAction == Action.FOLLOW) _trackingAction = Action.RECENTER;
 
-        if (_action == Action.RECENTER && _offCenter.magnitude > 0.1f)
+        if (_trackingAction == Action.RECENTER && _targetOffMark.magnitude > 0.1f)
         {
-            Vector3 toMove = _offCenter;
+            Vector3 toMove = _targetOffMark;
             if (toMove.magnitude > RecenterSpeed) toMove = toMove.normalized * RecenterSpeed;
             AbsoluteMove(toMove * Time.deltaTime);
         }
         else
         {
-            _action = Action.STILL;
+            _trackingAction = Action.STILL;
         }
+    }
+
+    void ExtendDolly(float amount, float multiplier = 1)
+    {
+        var toMove = _targetOffMark.normalized * amount * multiplier;
+        this.transform.position += toMove;
     }
 
     public void UpdateControlDir(InputAction.CallbackContext context)
@@ -59,15 +69,10 @@ class MySmartCamera : MonoBehaviour
         _controlDir = context.ReadValue<Vector2>();
     }
 
-    void ExtendDolly(float amount, float multiplier = 1)
-    {
-        var toMove = _offCenter.normalized * amount * multiplier;
-        this.transform.position += toMove;
-    }
 
-    private void AbsoluteMove(Vector3 toMove, float multiplier = 1)
+    void AbsoluteMove(Vector3 toMove, float multiplier = 1)
     {
         this.transform.position += toMove * multiplier;
-        _center += toMove;
+        _targetMark += toMove;
     }
 }
