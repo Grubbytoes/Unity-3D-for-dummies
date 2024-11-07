@@ -7,6 +7,14 @@ using UnityEngine.InputSystem;
 public class PlayerCharacter : MonoBehaviour, IPLayerChar
 {
     const float GravityStrength = 8;
+    
+    // The angle, in degrees, at which the player is viewing the player character
+    public float ViewAngle 
+    {
+        get {return viewAngle;}
+        set {viewAngle = value % 360f;}
+    } private float viewAngle;
+
     public float JumpPower = 5;
     public float MoveSpeed = 5;
 
@@ -20,6 +28,7 @@ public class PlayerCharacter : MonoBehaviour, IPLayerChar
     void Awake()
     {
         _charControl = GetComponent<CharacterController>();
+        ViewAngle = 0;
     }
 
     void Update()
@@ -43,7 +52,7 @@ public class PlayerCharacter : MonoBehaviour, IPLayerChar
 
     public void UpdateHorizontalInput(InputAction.CallbackContext ctx)
     {
-        _horizontalInput = ctx.ReadValue<Vector2>();
+        _horizontalInput = Quaternion.Euler(0f, 0f, ViewAngle) * ctx.ReadValue<Vector2>();
     }
     
     public void OnCollect(Collectable c)

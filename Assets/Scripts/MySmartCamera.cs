@@ -12,6 +12,7 @@ class MySmartCamera : MonoBehaviour
         RECENTER
     }
 
+    public PlayerCharacter ViewedChar;
     public Transform Target;
     public float RecenterSpeed;
     public float Dolly { get { return _positionRToMark.magnitude; } }
@@ -29,12 +30,17 @@ class MySmartCamera : MonoBehaviour
         _positionRToMark = this.transform.position - _targetMark;
         _trackingAction = Action.STILL;
     }
-
+    
+    private void Update() 
+    {
+        // Update the target position
+        _targetOffMark = Target.position - _targetMark;
+    }
     void LateUpdate()
     {
-        _targetOffMark = Target.position - _targetMark;
-
         TrackTarget();
+
+        if (_controlDir.x != 0) XOrbit(_controlDir.x * 120f * Time.deltaTime);
     }
 
     void TrackTarget()
@@ -65,9 +71,21 @@ class MySmartCamera : MonoBehaviour
         }
     }
 
-    void ExtendDolly(float amount, float multiplier = 1)
+    void XOrbit(float amount)
     {
-        var toMove = _targetOffMark.normalized * amount * multiplier;
+        var toRotate = Quaternion.Euler(0f, amount, 0f);
+        _positionRToMark = toRotate * _positionRToMark;
+        transform.rotation = toRotate * transform.rotation;
+        transform.position = _targetMark + _positionRToMark;
+
+        // I hate this
+        // But I honest to god cannot think of a better way
+        if (ViewedChar != null) ViewedChar.ViewAngle -= amount;
+    }
+
+    void ExtendDolly(float amount)
+    {
+        var toMove = _targetOffMark.normalized * amount;
         this.transform.position += toMove;
     }
 
@@ -77,9 +95,9 @@ class MySmartCamera : MonoBehaviour
     }
 
 
-    void AbsoluteMove(Vector3 toMove, float multiplier = 1)
+    void AbsoluteMove(Vector3 toMove)
     {
-        this.transform.position += toMove * multiplier;
+        this.transform.position += toMove;
         _targetMark += toMove;
     }
 }
