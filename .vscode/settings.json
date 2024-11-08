@@ -51,5 +51,8 @@
         "temp/": true,
         "Temp/": true
     },
-    "dotnet.defaultSolution": "Unity-3D-for-dummies.sln"
+    "dotnet.defaultSolution": "Unity-3D-for-dummies.sln",
+    "cSpell.words": [
+        "Mathf"
+    ]
 }

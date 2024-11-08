@@ -4,91 +4,75 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerCharacter : MonoBehaviour, IPLayerChar
+public class PlayerCharacter : BasePlayerCharacter
 {
-    const float GravityStrength = 8;
-    
-    // The angle, in degrees, at which the player is viewing the player character
-    public float ViewAngle 
-    {
-        get {return viewAngle;}
-        set {viewAngle = value % 360f;}
-    } private float viewAngle;
+    const float GravityStrength = 10;
 
     public float JumpPower = 5;
     public float MoveSpeed = 5;
 
-    private CharacterController _charControl; 
-    private Vector2 _horizontalInput;
-    private float _verticalVelocity;
-    private Vector3 _finalMovement;
-    private float _currentAngle;
-    private float _rotationalVelocity;
 
-    void Awake()
-    {
-        _charControl = GetComponent<CharacterController>();
-        ViewAngle = 0;
-    }
+    private float verticalVelocity;
+    private Vector3 finalMovement;
 
     void Update()
     {
-        _finalMovement = Vector3.zero;
+        finalMovement = Vector3.zero;
 
         ApplyHorizontalMovement();
         ApplyRotation();
+        ApplyJump();
         ApplyGravity();
 
-        _charControl.Move(_finalMovement);
+        charControl.Move(finalMovement);
     }
 
-    public void Jump(InputAction.CallbackContext ctx)
-    {
-        if (!ctx.started || !_charControl.isGrounded) return;
-
-        _verticalVelocity = JumpPower;
-        _finalMovement.y += JumpPower * Time.deltaTime;
-    }
-
-    public void UpdateHorizontalInput(InputAction.CallbackContext ctx)
-    {
-        _horizontalInput = Quaternion.Euler(0f, 0f, ViewAngle) * ctx.ReadValue<Vector2>();
-    }
-    
-    public void OnCollect(Collectable c)
+    // Called upon picking up collectable c
+    public override void OnCollect(Collectable c)
     {
         // TODO
     }
 
+    // Rotates the character such that they are facing towards the last horizontal input
     public void ApplyRotation()
     {
-        if (_horizontalInput.magnitude < 0.1f) return;
+        if (horizontalInput.magnitude < 0.1f) return;
 
-        var targetAngle = Mathf.Atan2(_horizontalInput.x, _horizontalInput.y) * Mathf.Rad2Deg;
-        _currentAngle = Mathf.SmoothDamp(_currentAngle, targetAngle, ref _rotationalVelocity, 0.15f);
+        var targetAngle = Mathf.Atan2(horizontalInput.x, horizontalInput.y) * Mathf.Rad2Deg;
 
-        transform.rotation = Quaternion.Euler(0f, _currentAngle, 0f);
+        transform.rotation = Quaternion.Euler(0f, targetAngle, 0f);
     }
 
+    // Apply a component along the XZ plane based on the horizontal input
     private void ApplyHorizontalMovement()
     {
         var deltaSpeed = Time.deltaTime * MoveSpeed;
 
-        _finalMovement.x += _horizontalInput.x * deltaSpeed;
-        _finalMovement.z += _horizontalInput.y * deltaSpeed;
+        finalMovement.x += horizontalInput.x * deltaSpeed;
+        finalMovement.z += horizontalInput.y * deltaSpeed;
     }
 
+    private void ApplyJump()
+    {
+        if (!doJump) return;
+        doJump = false;
+
+        verticalVelocity = JumpPower;
+        finalMovement.y += JumpPower * Time.deltaTime;
+    }
+
+    // Applies downward acceleration when airborne
     private void ApplyGravity()
     {
-        if (_charControl.isGrounded && _verticalVelocity < 0f)
+        if (charControl.isGrounded && verticalVelocity < 0f)
         {
-            _verticalVelocity = -1;
+            verticalVelocity = -1;
         }
         else
         {
-            _verticalVelocity -= 10 * Time.deltaTime;
+            verticalVelocity -= 10 * Time.deltaTime;
         }
-        
-        _finalMovement.y += _verticalVelocity * Time.deltaTime;
+
+        finalMovement.y += verticalVelocity * Time.deltaTime;
     }
 }

@@ -43,6 +43,7 @@ class MySmartCamera : MonoBehaviour
         if (_controlDir.x != 0) XOrbit(_controlDir.x * 120f * Time.deltaTime);
     }
 
+    // Updates position based on how far the target is off their mark
     void TrackTarget()
     {
         if (_targetOffMark.magnitude > 1)
@@ -71,6 +72,7 @@ class MySmartCamera : MonoBehaviour
         }
     }
 
+    // Orbits horizontally around the target mark
     void XOrbit(float amount)
     {
         var toRotate = Quaternion.Euler(0f, amount, 0f);
@@ -83,18 +85,13 @@ class MySmartCamera : MonoBehaviour
         if (ViewedChar != null) ViewedChar.ViewAngle -= amount;
     }
 
-    void ExtendDolly(float amount)
-    {
-        var toMove = _targetOffMark.normalized * amount;
-        this.transform.position += toMove;
-    }
-
-    public void UpdateControlDir(InputAction.CallbackContext context)
+    // Receiver for player input 
+    public void ControlDirInput(InputAction.CallbackContext context)
     {
         _controlDir = context.ReadValue<Vector2>();
     }
 
-
+    // Moves the camera AND target mark position
     void AbsoluteMove(Vector3 toMove)
     {
         this.transform.position += toMove;
