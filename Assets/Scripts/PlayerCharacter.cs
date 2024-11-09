@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.InputSystem;
 
 public class PlayerCharacter : BasePlayerCharacter
@@ -40,9 +41,8 @@ public class PlayerCharacter : BasePlayerCharacter
     {
         if (horizontalInput.magnitude < 0.1f) return;
 
-        var targetAngle = Mathf.Atan2(horizontalInput.x, horizontalInput.y) * Mathf.Rad2Deg;
-
-        transform.rotation = Quaternion.Euler(0f, targetAngle, 0f);
+        Quaternion toRotate = Quaternion.LookRotation(new Vector3(horizontalInput.x, 0f, horizontalInput.y));
+        transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotate, 720f * Time.deltaTime);
     }
 
     private void ApplyJump()

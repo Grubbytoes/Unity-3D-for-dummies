@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -15,11 +16,13 @@ class MySmartCamera : MonoBehaviour
 
     public PlayerCharacter targetChar;
     public float recenterSpeed = 0.5f;
+    public float maxOrbitSpeed = 120f;
 
     private Vector3 positionRToMark;
     private Vector3 targetMark;
     private Action trackingAction;
     private Vector2 controlDir;
+    private float rotationalSpeed = 0;
 
     void Start()
     {
@@ -32,7 +35,16 @@ class MySmartCamera : MonoBehaviour
     {
         TrackTarget();
 
-        if (controlDir.x != 0) XOrbit(controlDir.x * 120f * Time.deltaTime);
+        if (controlDir.x != 0) 
+        {
+            rotationalSpeed += maxOrbitSpeed * 2 * Time.deltaTime;
+            rotationalSpeed = Math.Min(rotationalSpeed, maxOrbitSpeed);
+            XOrbit(controlDir.x * rotationalSpeed * Time.deltaTime);
+        }
+        else if (rotationalSpeed > 0)
+        {
+            rotationalSpeed = 0;
+        }
     }
 
     // Updates position based on how far the target is off their mark
