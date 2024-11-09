@@ -11,7 +11,6 @@ public class PlayerCharacter : BasePlayerCharacter
     public float JumpPower = 5;
     public float MoveSpeed = 5;
 
-
     private float verticalVelocity;
     private Vector3 finalMovement;
 
@@ -27,10 +26,13 @@ public class PlayerCharacter : BasePlayerCharacter
         charControl.Move(finalMovement);
     }
 
-    // Called upon picking up collectable c
-    public override void OnCollect(Collectable c)
+    // Apply a component along the XZ plane based on the horizontal input
+    private void ApplyHorizontalMovement()
     {
-        // TODO
+        var deltaSpeed = Time.deltaTime * MoveSpeed;
+
+        finalMovement.x += horizontalInput.x * deltaSpeed;
+        finalMovement.z += horizontalInput.y * deltaSpeed;
     }
 
     // Rotates the character such that they are facing towards the last horizontal input
@@ -41,15 +43,6 @@ public class PlayerCharacter : BasePlayerCharacter
         var targetAngle = Mathf.Atan2(horizontalInput.x, horizontalInput.y) * Mathf.Rad2Deg;
 
         transform.rotation = Quaternion.Euler(0f, targetAngle, 0f);
-    }
-
-    // Apply a component along the XZ plane based on the horizontal input
-    private void ApplyHorizontalMovement()
-    {
-        var deltaSpeed = Time.deltaTime * MoveSpeed;
-
-        finalMovement.x += horizontalInput.x * deltaSpeed;
-        finalMovement.z += horizontalInput.y * deltaSpeed;
     }
 
     private void ApplyJump()
@@ -74,5 +67,11 @@ public class PlayerCharacter : BasePlayerCharacter
         }
 
         finalMovement.y += verticalVelocity * Time.deltaTime;
+    }
+
+    // Called upon picking up collectable c
+    public override void OnCollect(Collectable c)
+    {
+        // TODO
     }
 }

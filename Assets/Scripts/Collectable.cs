@@ -2,14 +2,6 @@ using UnityEngine;
 
 public class Collectable : MonoBehaviour
 {    
-    private Collider _collider;
-
-    // Start is called before the first frame update
-    void Awake()
-    {
-        _collider = GetComponent<SphereCollider>();
-    }
-
     public virtual void OnCollectedBy(BasePlayerCharacter pLayerChar)
     {
         gameObject.SetActive(false);

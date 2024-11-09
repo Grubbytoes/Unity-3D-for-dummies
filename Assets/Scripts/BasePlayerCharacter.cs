@@ -5,13 +5,13 @@ using UnityEngine.InputSystem;
 public abstract class BasePlayerCharacter : MonoBehaviour
 {
     // The angle, in degrees, at which the player is viewing the player character
+    private float _viewAngle;
     public float ViewAngle
     {
         get { return _viewAngle; }
         set { _viewAngle = value % 360f; }
     }
-    private float _viewAngle;
-
+    
     protected CharacterController charControl; 
     protected Vector2 horizontalInput;
     protected bool doJump;

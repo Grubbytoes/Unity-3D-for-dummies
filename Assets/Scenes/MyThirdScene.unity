@@ -2802,6 +2802,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2400595087160675351, guid: d635a24c60bad304395a001d9b8bb570, type: 3}
+      propertyPath: field of view
+      value: 50
+      objectReference: {fileID: 0}
     - target: {fileID: 2807923065705177198, guid: d635a24c60bad304395a001d9b8bb570, type: 3}
       propertyPath: m_Name
       value: My Smart Camera
@@ -2815,12 +2819,28 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1911450055}
     - target: {fileID: 6318681961037425425, guid: d635a24c60bad304395a001d9b8bb570, type: 3}
+      propertyPath: target
+      value: 
+      objectReference: {fileID: 1911450055}
+    - target: {fileID: 6318681961037425425, guid: d635a24c60bad304395a001d9b8bb570, type: 3}
       propertyPath: ViewedChar
+      value: 
+      objectReference: {fileID: 1911450056}
+    - target: {fileID: 6318681961037425425, guid: d635a24c60bad304395a001d9b8bb570, type: 3}
+      propertyPath: targetChar
+      value: 
+      objectReference: {fileID: 1911450056}
+    - target: {fileID: 6318681961037425425, guid: d635a24c60bad304395a001d9b8bb570, type: 3}
+      propertyPath: viewedChar
       value: 
       objectReference: {fileID: 1911450056}
     - target: {fileID: 6318681961037425425, guid: d635a24c60bad304395a001d9b8bb570, type: 3}
       propertyPath: RecenterSpeed
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6318681961037425425, guid: d635a24c60bad304395a001d9b8bb570, type: 3}
+      propertyPath: recenterSpeed
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 7334622891256133234, guid: d635a24c60bad304395a001d9b8bb570, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2832,7 +2852,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7334622891256133234, guid: d635a24c60bad304395a001d9b8bb570, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -6
+      value: -6.5
       objectReference: {fileID: 0}
     - target: {fileID: 7334622891256133234, guid: d635a24c60bad304395a001d9b8bb570, type: 3}
       propertyPath: m_LocalRotation.w
