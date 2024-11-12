@@ -11,6 +11,13 @@ public abstract class BasePlayerCharacter : MonoBehaviour
         get { return _viewAngle; }
         set { _viewAngle = value % 360f; }
     }
+
+    // The players inventory, storing references to collectable items
+    private Inventory _inventory;
+    public Inventory PlayerInventory {
+        get => _inventory; 
+        private set => _inventory = value;
+    }
     
     protected CharacterController charControl; 
     protected Vector2 horizontalInput;
@@ -20,6 +27,7 @@ public abstract class BasePlayerCharacter : MonoBehaviour
     {
         charControl = GetComponent<CharacterController>();
         ViewAngle = 0;
+        PlayerInventory = new Inventory();
     }
 
     // Receives the Vector2 representing the players arrow key input, rotated by the view angle

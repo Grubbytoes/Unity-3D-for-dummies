@@ -93,7 +93,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8736554088750098472}
   - component: {fileID: 455745689527584737}
-  - component: {fileID: 698121010713299497}
+  - component: {fileID: 3965555962605637803}
   m_Layer: 6
   m_Name: InteractHand
   m_TagString: Untagged
@@ -137,7 +137,7 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &698121010713299497
+--- !u!114 &3965555962605637803
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
