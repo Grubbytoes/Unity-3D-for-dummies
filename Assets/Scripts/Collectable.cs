@@ -2,8 +2,14 @@ using UnityEngine;
 
 public class Collectable : MonoBehaviour
 {    
-    public virtual void OnCollectedBy(BasePlayerCharacter pLayerChar)
+    public static string reference = "collectable";
+
+    public virtual void OnCollectedBy(BasePlayerCharacter playerChar)
     {
+        // Add reference to inventory
+        playerChar.Inventory.Add(reference);
+
+        // Deactivate self
         gameObject.SetActive(false);
     }
 
