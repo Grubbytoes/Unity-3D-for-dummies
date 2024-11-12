@@ -8,4 +8,9 @@ public class InteractableObject : MonoBehaviour
         Debug.Log("I HAVE BEEN HIGHLIGHTED");
         // TODO
     }
+
+	public virtual void OnSelected()
+	{
+		Debug.Log("I HAVE BEEN SELECTED");
+	}
 }

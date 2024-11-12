@@ -1,16 +1,13 @@
 using UnityEngine;
 
 public class Collectable : MonoBehaviour
-{    
-    public static string reference = "collectable";
-
-    public virtual void OnCollectedBy(BasePlayerCharacter playerChar)
-    public static string reference = "collectable";
+{        
+	public static string itemName = "collectable";
 
     public virtual void OnCollectedBy(BasePlayerCharacter playerChar)
     {
         // Add reference to inventory
-        playerChar.Inventory.Add(reference);
+        playerChar.Inventory.Add(itemName);
 
         // Deactivate self
         gameObject.SetActive(false);
