@@ -1,18 +1,21 @@
 using System;
+using Unity;
 using System.Collections.Generic;
+using System.Diagnostics;
+using UnityEngine.AI;
 
 public class ItemStore
 {
-    private Dictionary<String, int> inventoryItems;
+    private Dictionary<String, int> items;
 
     public ItemStore()
     {
-        inventoryItems = new Dictionary<string, int>();
+        items = new Dictionary<string, int>();
     }
 
 	public bool Has(string itemName) 
 	{
-		return inventoryItems.ContainsKey(itemName);
+		return items.ContainsKey(itemName);
 	}
 
 	public bool Has(string itemName, int amount, bool exact = false)
@@ -23,11 +26,11 @@ public class ItemStore
 		}
 		else if (exact)
 		{
-			return inventoryItems[itemName] == amount;
+			return items[itemName] == amount;
 		}
 		else
 		{
-			return inventoryItems[itemName] >= amount;
+			return items[itemName] >= amount;
 		}
 	}
 
@@ -35,13 +38,13 @@ public class ItemStore
     {
 		if (amount <= 0) return;
 
-        if (!inventoryItems.ContainsKey(itemName)) 
+        if (!items.ContainsKey(itemName)) 
         {
-            inventoryItems[itemName] = amount;
+            items[itemName] = amount;
         }
         else
         {
-            inventoryItems[itemName] += amount;
+            items[itemName] += amount;
         }
     }
 
@@ -50,21 +53,21 @@ public class ItemStore
 	public bool Drop(string itemName, int amount = 1)
 	{
 		if (amount <= 0) return false;
-		if (!inventoryItems.ContainsKey(itemName)) return false;
+		if (!items.ContainsKey(itemName)) return false;
 
-		if (inventoryItems[itemName] < amount)
+		if (items[itemName] < amount)
 		{
-			inventoryItems.Remove(itemName);
+			items.Remove(itemName);
 			return false; 
 		}
-		else if (inventoryItems[itemName] == amount)
+		else if (items[itemName] == amount)
 		{
-			inventoryItems.Remove(itemName);
+			items.Remove(itemName);
 			return true;
 		}
 		else 
 		{
-			inventoryItems[itemName] -= amount;
+			items[itemName] -= amount;
 			return true;
 		}
 	}

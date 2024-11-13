@@ -9,16 +9,20 @@ class InteractHand : MonoBehaviour
 		return highlighted != null;
 	}
 
-	public void Select()
+	public void TryInteract()
 	{
-		if (!ObjectHighlighted()) return;
+		if (!ObjectHighlighted()) 
+		{
+			Debug.Log("Oops, no hightlighted object!");
+			return;
+		}
+
+		Debug.Log("Interacting!");
 		highlighted.OnSelected();
 	}
 
     private void OnTriggerEnter(Collider other) 
     {
-        Debug.Log("beep");
-
         InteractableObject io = other.GetComponent<InteractableObject>();
         if (io == null) return;
 

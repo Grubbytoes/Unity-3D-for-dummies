@@ -1,8 +1,11 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Events;
 
 public abstract class BasePlayerCharacter : MonoBehaviour
 {
+    public UnityEvent TryInteract;
+
     // The angle, in degrees, at which the player is viewing the player character
     private float _viewAngle;
     public float ViewAngle
@@ -41,6 +44,12 @@ public abstract class BasePlayerCharacter : MonoBehaviour
     {
         if (!ctx.started || !charControl.isGrounded) return;
         doJump = true;
+    }
+
+    public void InteractInput(InputAction.CallbackContext ctx)
+    {
+        if (!ctx.started || !charControl.isGrounded) return;
+        TryInteract.Invoke();
     }
 
     public abstract void OnCollect(Collectable collectable);

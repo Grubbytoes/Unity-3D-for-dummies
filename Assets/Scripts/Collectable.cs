@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Collectable : MonoBehaviour
 {        
-	public static string itemName = "collectable";
+	public string itemName = "collectable";
 
     public virtual void OnCollectedBy(BasePlayerCharacter playerChar)
     {
