@@ -5,6 +5,7 @@ using UnityEngine.Events;
 public abstract class BasePlayerCharacter : MonoBehaviour
 {
     public UnityEvent TryInteract;
+    public UnityEvent<string> ItemPickedUp;
 
     // The angle, in degrees, at which the player is viewing the player character
     private float _viewAngle;
@@ -52,5 +53,9 @@ public abstract class BasePlayerCharacter : MonoBehaviour
         TryInteract.Invoke();
     }
 
-    public abstract void OnCollect(Collectable collectable);
+    public virtual void OnCollect(Collectable collectable)
+    {
+        Debug.Log($"I have picked up a {collectable.itemName}");
+        ItemPickedUp.Invoke(collectable.itemName);
+    }
 }

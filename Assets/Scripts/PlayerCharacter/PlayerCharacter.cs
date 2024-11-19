@@ -68,10 +68,4 @@ public class PlayerCharacter : BasePlayerCharacter
 
         finalMovement.y += verticalVelocity * Time.deltaTime;
     }
-
-    // Called upon picking up collectable c
-    public override void OnCollect(Collectable c)
-    {
-        // TODO
-    }
 }
