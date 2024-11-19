@@ -23,6 +23,8 @@ class InteractHand : MonoBehaviour
 
     private void OnTriggerEnter(Collider other) 
     {
+		Debug.Log("Entered trigger");
+
         InteractableObject io = other.GetComponent<InteractableObject>();
         if (io == null) return;
 
