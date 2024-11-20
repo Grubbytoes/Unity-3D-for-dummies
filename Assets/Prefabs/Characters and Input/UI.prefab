@@ -563,6 +563,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f37e36672760408b81189d96779d2d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  geodeCountMesh: {fileID: 1134963657536014576}
+  tonicCountMesh: {fileID: 7721331166964175533}
 --- !u!1 &7046904387397795021
 GameObject:
   m_ObjectHideFlags: 0

@@ -119,6 +119,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df1f65830496c46c98a0e0f4c0fa4d27, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  itemName: tonic
 --- !u!95 &5873055851676881679
 Animator:
   serializedVersion: 5

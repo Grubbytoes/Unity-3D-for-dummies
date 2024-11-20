@@ -1,17 +1,55 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerHUD : MonoBehaviour
 {
-    private TextMeshPro geodeCount;
-    private TextMeshPro tonicCount;
+    public int GeodeCount
+    {
+        get => _geodeCount;
+        set {
+            _geodeCount = value;
+            geodeCountMesh.text = value.ToString();
+        }
+    } private int _geodeCount;
+    public int TonicCount 
+    {
+        get => _tonicCount;
+        set {
+            _tonicCount = value;
+            tonicCountMesh.text = value.ToString();
+        }        
+    }   private int _tonicCount;
+
+    [SerializeField] private TextMeshProUGUI geodeCountMesh;
+    [SerializeField] private TextMeshProUGUI tonicCountMesh;
 
     void Awake()
     {
-        geodeCount = transform.Find("Canvas/Item Panel/Geode Count").GetComponent<TextMeshPro>();
+        TonicCount = 0;
+        GeodeCount = 0;
+    }
 
-        if (geodeCount == null) Debug.Log("There was a problem!!");
+    public void OnItemPickedUp(string item)
+    {
+        if (item == "tonic")
+        {
+            TonicCount++;
+        }   
+        else if (item == "geode")
+        {
+            GeodeCount++;
+        }
+
+        Debug.Log($"Unknown collectable '{item}'");
+    }
+
+    struct TextMeshNumber
+    {
+        int number;
+        TextMeshProUGUI textMesh;
     }
 }
