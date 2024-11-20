@@ -16,7 +16,8 @@ class MySmartCamera : MonoBehaviour
 
     public PlayerCharacter targetChar;
     public float recenterSpeed = 0.5f;
-    public float maxOrbitSpeed = 120f;
+    public float maxOrbitSpeed = 80f;
+    public float trackAllowance = 0.6f;
 
     private Vector3 positionRToMark;
     private Vector3 targetMark;
@@ -50,7 +51,7 @@ class MySmartCamera : MonoBehaviour
     // Updates position based on how far the target is off their mark
     void TrackTarget()
     {
-        if (TargetOffMark.magnitude > 1)
+        if (TargetOffMark.magnitude > trackAllowance)
         {
             AbsoluteMove(TargetOffMark - TargetOffMark.normalized * 1);
             trackingAction = Action.RECENTER;

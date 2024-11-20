@@ -42,7 +42,7 @@ public class PlayerCharacter : BasePlayerCharacter
         if (horizontalInput.magnitude < 0.1f) return;
 
         Quaternion toRotate = Quaternion.LookRotation(new Vector3(horizontalInput.x, 0f, horizontalInput.y));
-        transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotate, 720f * Time.deltaTime);
+        transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotate, 400f * Time.deltaTime);
     }
 
     private void ApplyJump()

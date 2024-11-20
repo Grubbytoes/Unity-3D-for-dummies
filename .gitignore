@@ -4,7 +4,8 @@
 #
 
 # MY STUFF
-Assets/Media/*
+Assets/Media/Texture*
+Assets/Media/Sound*
 # MY STUFF ENDS
 
 /[Ll]ibrary/
