@@ -7,13 +7,6 @@ public abstract class BasePlayerCharacter : MonoBehaviour
     public UnityEvent TryInteract;
     public UnityEvent<string> ItemPickedUp;
 
-    // The angle, in degrees, at which the player is viewing the player character
-    private float _viewAngle;
-    public float ViewAngle
-    {
-        get { return _viewAngle; }
-        set { _viewAngle = value % 360f; }
-    }
 
     // The players inventory, storing references to collectable items
     private ItemStore _inventory;
@@ -29,7 +22,6 @@ public abstract class BasePlayerCharacter : MonoBehaviour
     void Awake()
     {
         charControl = GetComponent<CharacterController>();
-        ViewAngle = 0;
         Inventory = new ItemStore();
     }
 

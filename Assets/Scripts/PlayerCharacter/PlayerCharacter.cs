@@ -13,6 +13,8 @@ public class PlayerCharacter : BasePlayerCharacter
     public float JumpPower = 5;
     public float MoveSpeed = 5;
 
+    protected Vector2 HorizontalMoveDir;
+
     private float verticalVelocity;
     private Vector3 finalMovement;
 
@@ -32,10 +34,10 @@ public class PlayerCharacter : BasePlayerCharacter
     private void ApplyHorizontalMovement()
     {
         var deltaSpeed = Time.deltaTime * MoveSpeed;
-        var moveDir = Quaternion.Euler(0f, 0f, -ViewCamera.eulerAngles.y) * horizontalInput;
+        HorizontalMoveDir = Quaternion.Euler(0f, 0f, -ViewCamera.eulerAngles.y) * horizontalInput;
         
-        finalMovement.x += moveDir.x * deltaSpeed;
-        finalMovement.z += moveDir.y * deltaSpeed;
+        finalMovement.x += HorizontalMoveDir.x * deltaSpeed;
+        finalMovement.z += HorizontalMoveDir.y * deltaSpeed;
     }
 
     // Rotates the character such that they are facing towards the last horizontal input
@@ -43,7 +45,7 @@ public class PlayerCharacter : BasePlayerCharacter
     {
         if (horizontalInput.magnitude < 0.1f) return;
 
-        Quaternion toRotate = Quaternion.LookRotation(new Vector3(horizontalInput.x, 0f, horizontalInput.y));
+        Quaternion toRotate = Quaternion.LookRotation(new Vector3(HorizontalMoveDir.x, 0f, HorizontalMoveDir.y));
         transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotate, 400f * Time.deltaTime);
     }
 
