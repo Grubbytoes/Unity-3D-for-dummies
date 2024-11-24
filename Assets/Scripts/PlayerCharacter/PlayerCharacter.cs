@@ -9,6 +9,7 @@ public class PlayerCharacter : BasePlayerCharacter
 {
     const float GravityStrength = 10;
 
+    [SerializeField] private Transform ViewCamera;
     public float JumpPower = 5;
     public float MoveSpeed = 5;
 
@@ -31,9 +32,10 @@ public class PlayerCharacter : BasePlayerCharacter
     private void ApplyHorizontalMovement()
     {
         var deltaSpeed = Time.deltaTime * MoveSpeed;
-
-        finalMovement.x += horizontalInput.x * deltaSpeed;
-        finalMovement.z += horizontalInput.y * deltaSpeed;
+        var moveDir = Quaternion.Euler(0f, 0f, -ViewCamera.eulerAngles.y) * horizontalInput;
+        
+        finalMovement.x += moveDir.x * deltaSpeed;
+        finalMovement.z += moveDir.y * deltaSpeed;
     }
 
     // Rotates the character such that they are facing towards the last horizontal input

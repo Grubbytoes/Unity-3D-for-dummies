@@ -36,7 +36,7 @@ public abstract class BasePlayerCharacter : MonoBehaviour
     // Receives the Vector2 representing the players arrow key input, rotated by the view angle
     public void HorizontalInput(InputAction.CallbackContext ctx)
     {
-        horizontalInput = Quaternion.Euler(0f, 0f, ViewAngle) * ctx.ReadValue<Vector2>();
+        horizontalInput = ctx.ReadValue<Vector2>();
     }
 
     // Receives the call to jump
