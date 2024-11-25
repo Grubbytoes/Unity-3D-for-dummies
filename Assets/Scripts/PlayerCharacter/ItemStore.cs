@@ -6,18 +6,15 @@ using UnityEngine.AI;
 
 public class ItemStore
 {
-    private Dictionary<String, int> items;
+    protected Dictionary<String, int> Items = new();
 
-    public ItemStore()
-    {
-        items = new Dictionary<string, int>();
-    }
-
+	// Does the item store contain this item
 	public bool Has(string itemName) 
 	{
-		return items.ContainsKey(itemName);
+		return Items.ContainsKey(itemName);
 	}
 
+	// Does the item store contain at least, or exactly, 'amount' items
 	public bool Has(string itemName, int amount, bool exact = false)
 	{
 		if (!Has(itemName))
@@ -26,25 +23,26 @@ public class ItemStore
 		}
 		else if (exact)
 		{
-			return items[itemName] == amount;
+			return Items[itemName] == amount;
 		}
 		else
 		{
-			return items[itemName] >= amount;
+			return Items[itemName] >= amount;
 		}
 	}
 
+	// Adds item(s) to store
     public void Add(string itemName, int amount = 1)
     {
 		if (amount <= 0) return;
 
-        if (!items.ContainsKey(itemName)) 
+        if (!Items.ContainsKey(itemName)) 
         {
-            items[itemName] = amount;
+            Items[itemName] = amount;
         }
         else
         {
-            items[itemName] += amount;
+            Items[itemName] += amount;
         }
     }
 
@@ -53,21 +51,21 @@ public class ItemStore
 	public bool Drop(string itemName, int amount = 1)
 	{
 		if (amount <= 0) return false;
-		if (!items.ContainsKey(itemName)) return false;
+		if (!Items.ContainsKey(itemName)) return false;
 
-		if (items[itemName] < amount)
+		if (Items[itemName] < amount)
 		{
-			items.Remove(itemName);
+			Items.Remove(itemName);
 			return false; 
 		}
-		else if (items[itemName] == amount)
+		else if (Items[itemName] == amount)
 		{
-			items.Remove(itemName);
+			Items.Remove(itemName);
 			return true;
 		}
 		else 
 		{
-			items[itemName] -= amount;
+			Items[itemName] -= amount;
 			return true;
 		}
 	}

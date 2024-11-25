@@ -12,7 +12,7 @@ public class PlayerHUD : MonoBehaviour
         get => _geodeCount;
         set {
             _geodeCount = value;
-            geodeCountMesh.text = value.ToString();
+            GeodeCountMesh.text = value.ToString();
         }
     } private int _geodeCount;
     public int TonicCount 
@@ -20,12 +20,12 @@ public class PlayerHUD : MonoBehaviour
         get => _tonicCount;
         set {
             _tonicCount = value;
-            tonicCountMesh.text = value.ToString();
+            TonicCountMesh.text = value.ToString();
         }        
     }   private int _tonicCount;
 
-    [SerializeField] private TextMeshProUGUI geodeCountMesh;
-    [SerializeField] private TextMeshProUGUI tonicCountMesh;
+    [SerializeField] private TextMeshProUGUI GeodeCountMesh;
+    [SerializeField] private TextMeshProUGUI TonicCountMesh;
 
     void Awake()
     {
@@ -45,11 +45,5 @@ public class PlayerHUD : MonoBehaviour
         }
 
         Debug.Log($"Unknown collectable '{item}'");
-    }
-
-    struct TextMeshNumber
-    {
-        int number;
-        TextMeshProUGUI textMesh;
     }
 }

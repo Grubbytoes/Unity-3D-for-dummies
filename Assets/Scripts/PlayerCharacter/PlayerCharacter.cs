@@ -1,75 +1,115 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
+
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.AI;
 using UnityEngine.InputSystem;
 
-public class PlayerCharacter : BasePlayerCharacter
+public class PlayerCharacter : MonoBehaviour
 {
-    const float GravityStrength = 10;
+	public UnityEvent TryInteract;
+	public UnityEvent<string> ItemPickedUp;
 
-    [SerializeField] private Transform ViewCamera;
-    public float JumpPower = 5;
-    public float MoveSpeed = 5;
+	const float GravityStrength = 10;
 
-    protected Vector2 HorizontalMoveDir;
+	public float JumpPower = 5;
+	public float MoveSpeed = 5;
+	public readonly ItemStore Inventory = new();
+	public Transform ViewCamera;
+	
+	protected Vector2 HorizontalInputDir;
+	protected Vector2 HorizontalMoveDir;
+	protected CharacterController CharControl;
+	protected bool DoJump;
 
-    private float verticalVelocity;
-    private Vector3 finalMovement;
+	private float _verticalVelocity;
+	private Vector3 _finalMovement;
 
-    void Update()
-    {
-        finalMovement = Vector3.zero;
+	void Awake()
+	{
+		CharControl = GetComponent<CharacterController>();
+	}
 
-        ApplyHorizontalMovement();
-        ApplyRotation();
-        ApplyJump();
-        ApplyGravity();
+	void Update()
+	{
+		_finalMovement = Vector3.zero;
 
-        charControl.Move(finalMovement);
-    }
+		ApplyHorizontalMovement();
+		ApplyRotation();
+		ApplyJump();
+		ApplyGravity();
 
-    // Apply a component along the XZ plane based on the horizontal input
-    private void ApplyHorizontalMovement()
-    {
-        var deltaSpeed = Time.deltaTime * MoveSpeed;
-        HorizontalMoveDir = Quaternion.Euler(0f, 0f, -ViewCamera.eulerAngles.y) * horizontalInput;
-        
-        finalMovement.x += HorizontalMoveDir.x * deltaSpeed;
-        finalMovement.z += HorizontalMoveDir.y * deltaSpeed;
-    }
+		CharControl.Move(_finalMovement);
+	}
 
-    // Rotates the character such that they are facing towards the last horizontal input
-    public void ApplyRotation()
-    {
-        if (horizontalInput.magnitude < 0.1f) return;
+	// Apply a component along the XZ plane based on the horizontal input
+	private void ApplyHorizontalMovement()
+	{
+		var deltaSpeed = Time.deltaTime * MoveSpeed;
+		HorizontalMoveDir = Quaternion.Euler(0f, 0f, -ViewCamera.eulerAngles.y) * HorizontalInputDir;
 
-        Quaternion toRotate = Quaternion.LookRotation(new Vector3(HorizontalMoveDir.x, 0f, HorizontalMoveDir.y));
-        transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotate, 400f * Time.deltaTime);
-    }
+		_finalMovement.x += HorizontalMoveDir.x * deltaSpeed;
+		_finalMovement.z += HorizontalMoveDir.y * deltaSpeed;
+	}
 
-    private void ApplyJump()
-    {
-        if (!doJump) return;
-        doJump = false;
+	// Rotates the character such that they are facing towards the direction of travel
+	public void ApplyRotation()
+	{
+		if (HorizontalInputDir.magnitude < 0.1f) return;
 
-        verticalVelocity = JumpPower;
-        finalMovement.y += JumpPower * Time.deltaTime;
-    }
+		Quaternion toRotate = Quaternion.LookRotation(new Vector3(HorizontalMoveDir.x, 0f, HorizontalMoveDir.y));
+		transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotate, 400f * Time.deltaTime);
+	}
 
-    // Applies downward acceleration when airborne
-    private void ApplyGravity()
-    {
-        if (charControl.isGrounded && verticalVelocity < 0f)
-        {
-            verticalVelocity = -1;
-        }
-        else
-        {
-            verticalVelocity -= 10 * Time.deltaTime;
-        }
+	// Applies upward velocity on the y axis, if a jump is queued (DoJump)
+	private void ApplyJump()
+	{
+		if (!DoJump) return;
+		DoJump = false;
 
-        finalMovement.y += verticalVelocity * Time.deltaTime;
-    }
+		_verticalVelocity = JumpPower;
+		_finalMovement.y += JumpPower * Time.deltaTime;
+	}
+
+	// Applies downward acceleration when airborne
+	private void ApplyGravity()
+	{
+		if (CharControl.isGrounded && _verticalVelocity < 0f)
+		{
+			_verticalVelocity = -1;
+		}
+		else
+		{
+			_verticalVelocity -= GravityStrength * Time.deltaTime;
+		}
+
+		_finalMovement.y += _verticalVelocity * Time.deltaTime;
+	}
+
+	// Called upon picking up a collectable
+	public virtual void OnCollect(Collectable collectable)
+	{
+		Debug.Log($"I have picked up a {collectable.ItemName}");
+		ItemPickedUp.Invoke(collectable.ItemName);
+	}
+
+	// INPUT LISTENER METHODS
+	// Receives the Vector2 representing the players arrow key input, rotated by the view angle
+	public void HorizontalInput(InputAction.CallbackContext ctx)
+	{
+		HorizontalInputDir = ctx.ReadValue<Vector2>();
+	}
+
+	// Receives the call to jump
+	public void JumpInput(InputAction.CallbackContext ctx)
+	{
+		if (!ctx.started || !CharControl.isGrounded) return;
+		DoJump = true;
+	}
+
+	// Receives the call to interact
+	public void InteractInput(InputAction.CallbackContext ctx)
+	{
+		if (!ctx.started || !CharControl.isGrounded) return;
+		TryInteract.Invoke();
+	}
 }

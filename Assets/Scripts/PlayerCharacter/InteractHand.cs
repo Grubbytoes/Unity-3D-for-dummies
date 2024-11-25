@@ -2,11 +2,11 @@ using UnityEngine;
 
 class InteractHand : MonoBehaviour
 {
-	private InteractableObject highlighted;
+	protected InteractableObject HighlightedObject;
 
 	public bool ObjectHighlighted()
 	{
-		return highlighted != null;
+		return HighlightedObject != null;
 	}
 
 	public void TryInteract()
@@ -18,7 +18,7 @@ class InteractHand : MonoBehaviour
 		}
 
 		Debug.Log("Interacting!");
-		highlighted.OnSelected();
+		HighlightedObject.OnSelected();
 	}
 
     private void OnTriggerEnter(Collider other) 
@@ -29,11 +29,11 @@ class InteractHand : MonoBehaviour
         if (io == null) return;
 
         io.OnHighlighted();
-		highlighted = io;
+		HighlightedObject = io;
     }
 
 	private void OnTriggerExit(Collider other)
 	{
-		if (other == highlighted) highlighted = null;
+		if (other == HighlightedObject) HighlightedObject = null;
 	}
 }
