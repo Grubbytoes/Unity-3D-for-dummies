@@ -43,7 +43,9 @@ public class PlayerHUD : MonoBehaviour
         {
             GeodeCount++;
         }
-
-        Debug.Log($"Unknown collectable '{item}'");
+        else
+        {
+            Debug.Log($"Unknown collectable '{item}'");
+        }
     }
 }
