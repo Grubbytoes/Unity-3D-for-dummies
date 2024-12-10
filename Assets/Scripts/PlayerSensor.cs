@@ -11,6 +11,5 @@ public class PlayerSensor : MonoBehaviour
         var player = other.GetComponent<PlayerCharacter>();
         if (player == null) return;
         PlayerEntered.Invoke(player);
-        Debug.Log("Event invoked!");
     }
 }
