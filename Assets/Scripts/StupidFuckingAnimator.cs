@@ -4,14 +4,19 @@ using UnityEngine;
 
 public class StupidFuckingAnimator : MonoBehaviour
 {
+    public Animator anim;
+    protected float offset;
+
+    void Awake() {
+        System.Random r = new();
+        offset = (float)r.NextDouble();  
+    }
+
     // Start is called before the first frame update
     void Start()
     {
-        System.Random r = new();
-        Animator stupidIHateIt = GetComponent<Animator>();
-        float offset = (float)r.NextDouble();
-
-        // stupidIHateIt.SetFloat("Offset", offset);
-        stupidIHateIt.SetTrigger("Go");
+        anim.SetFloat("flickerOffset", offset);
+        anim.SetFloat("flickerSpeed", 1+offset/2);
+        anim.SetBool("isFlickering", true);
     }
 }
