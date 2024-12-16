@@ -1,4 +1,6 @@
 
+using System;
+
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.AI;
@@ -6,6 +8,8 @@ using UnityEngine.InputSystem;
 
 public class PlayerCharacter : MonoBehaviour
 {
+	public static event Action CollectedEnoughItems;
+
 	public UnityEvent TryInteract;
 	public UnityEvent<string> ItemPickedUp;
 
@@ -88,8 +92,14 @@ public class PlayerCharacter : MonoBehaviour
 	// Called upon picking up a collectable
 	public virtual void OnCollect(Collectable collectable)
 	{
-		Debug.Log($"I have picked up a {collectable.ItemName}");
 		ItemPickedUp.Invoke(collectable.ItemName);
+
+		// Check whether we have collected enough
+		// For now, we'll go for 12 geodes and 3 tonics
+		if (Inventory.Has("geode", 1) && Inventory.Has("tonic", 1)) 
+		{
+			CollectedEnoughItems();
+		}
 	}
 
 	// INPUT LISTENER METHODS
