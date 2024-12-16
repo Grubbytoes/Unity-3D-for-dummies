@@ -16,6 +16,7 @@ public class SmallDoorway : MonoBehaviour
 
     private void OpenDoor()
     {
-        // TODO
+        Debug.Log("Door has opened");
+        anim.SetTrigger("openDoor");
     }
 }
