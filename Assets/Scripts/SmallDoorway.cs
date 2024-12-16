@@ -1,11 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 // God have mercy on me a sinner, I am loosing my mind
 public class SmallDoorway : MonoBehaviour
 {
     protected Animator anim;
+    protected bool isOpen;
 
     // Start is called before the first frame update
     void Start()
@@ -14,9 +13,17 @@ public class SmallDoorway : MonoBehaviour
         PlayerCharacter.CollectedEnoughItems += OpenDoor;
     }
 
+    public void TryGoThrough()
+    {
+        if (!isOpen) return;
+
+        GameSingleton.S.ChangeScene("MuseumHall", "Cellar");
+    }
+
     private void OpenDoor()
     {
         Debug.Log("Door has opened");
         anim.SetTrigger("openDoor");
+        isOpen = true;
     }
 }
