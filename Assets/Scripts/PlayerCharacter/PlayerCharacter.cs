@@ -120,6 +120,8 @@ public class PlayerCharacter : MonoBehaviour
 	public void InteractInput(InputAction.CallbackContext ctx)
 	{
 		if (interactHand == null) return;
+		if (!ctx.started) return;
+		
 		interactHand.SelectHighlightedObject();
 	}
 }

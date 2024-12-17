@@ -35,5 +35,7 @@ public class InteractObject : MonoBehaviour
     private void OnSelect()
     {
         if (!IsHighlighted) return;
+
+        Debug.Log("I have been selected woop!");
     }
 }
