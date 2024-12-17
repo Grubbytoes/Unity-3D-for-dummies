@@ -10,7 +10,6 @@ public class PlayerCharacter : MonoBehaviour
 {
 	public static event Action CollectedEnoughItems;
 
-	public UnityEvent TryInteract;
 	public UnityEvent<string> ItemPickedUp;
 
 	const float GravityStrength = 10;
@@ -20,6 +19,7 @@ public class PlayerCharacter : MonoBehaviour
 	public readonly ItemStore Inventory = new();
 	public Transform ViewCamera;
 	
+	[SerializeField] protected InteractHand interactHand;
 	protected Vector2 HorizontalInputDir;
 	protected Vector2 HorizontalMoveDir;
 	protected CharacterController CharControl;
@@ -119,7 +119,8 @@ public class PlayerCharacter : MonoBehaviour
 	// Receives the call to interact
 	public void InteractInput(InputAction.CallbackContext ctx)
 	{
-		if (!ctx.started || !CharControl.isGrounded) return;
-		TryInteract.Invoke();
+		Debug.Log("Trying to interact...");
+		if (interactHand == null) return;
+		interactHand.SelectHighlightedObject();
 	}
 }
