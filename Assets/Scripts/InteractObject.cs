@@ -4,16 +4,36 @@ using UnityEngine.Events;
 
 public class InteractObject : MonoBehaviour
 {
-    public bool IsHighlighted { get; set; }
+    private bool _isHighlighted;
+    public bool IsHighlighted
+    {
+        get { return _isHighlighted; }
+        set 
+        { 
+            _isHighlighted = value;
+            billboard.enabled = value;
+        }
+    }
+    
+
+    [SerializeField] protected SpriteRenderer billboard;
 
     void Awake()
     {
+        IsHighlighted = false;
         InteractHand.Select += OnSelect;
+    }
+
+    void Update()
+    {
+        if (IsHighlighted)
+        {
+            billboard.transform.LookAt(Camera.allCameras[0].transform.position, -Vector3.up);
+        }
     }
 
     private void OnSelect()
     {
         if (!IsHighlighted) return;
-        Debug.Log("I have been selected!!");
     }
 }

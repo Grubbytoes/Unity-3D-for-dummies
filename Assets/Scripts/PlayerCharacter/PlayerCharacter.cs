@@ -119,7 +119,6 @@ public class PlayerCharacter : MonoBehaviour
 	// Receives the call to interact
 	public void InteractInput(InputAction.CallbackContext ctx)
 	{
-		Debug.Log("Trying to interact...");
 		if (interactHand == null) return;
 		interactHand.SelectHighlightedObject();
 	}
