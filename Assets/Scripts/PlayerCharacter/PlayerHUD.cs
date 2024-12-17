@@ -1,9 +1,6 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class PlayerHUD : MonoBehaviour
 {
@@ -15,6 +12,7 @@ public class PlayerHUD : MonoBehaviour
             GeodeCountMesh.text = value.ToString();
         }
     } private int _geodeCount;
+    
     public int TonicCount 
     {
         get => _tonicCount;
@@ -27,10 +25,30 @@ public class PlayerHUD : MonoBehaviour
     [SerializeField] private TextMeshProUGUI GeodeCountMesh;
     [SerializeField] private TextMeshProUGUI TonicCountMesh;
 
+    protected Animator anim;
+    protected bool popupActive;
+
     void Awake()
     {
         TonicCount = 0;
         GeodeCount = 0;
+        anim = GetComponent<Animator>();
+
+        InteractObject.PopupText += Popup;
+        PlayerCharacter.UiEscape += EscapePopup;
+    }
+
+    private void Popup(string text, bool asPath)
+    {
+        anim.SetTrigger("putPaperUp");
+        popupActive = true;
+    }
+
+    private void EscapePopup()
+    {
+        if (!popupActive) return;
+
+        anim.SetTrigger("putPaperDown");
     }
 
     public void OnItemPickedUp(string item)

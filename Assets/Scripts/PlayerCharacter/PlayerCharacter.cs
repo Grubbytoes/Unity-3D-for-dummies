@@ -9,6 +9,7 @@ using UnityEngine.InputSystem;
 public class PlayerCharacter : MonoBehaviour
 {
 	public static event Action CollectedEnoughItems;
+	public static event Action UiEscape;
 
 	public UnityEvent<string> ItemPickedUp;
 
@@ -121,7 +122,14 @@ public class PlayerCharacter : MonoBehaviour
 	{
 		if (interactHand == null) return;
 		if (!ctx.started) return;
-		
+
 		interactHand.SelectHighlightedObject();
+	}
+
+	// Receiver used for various UI bollocks
+	public void EscInput(InputAction.CallbackContext ctx)
+	{
+		if (!ctx.started) return;
+		UiEscape.Invoke();
 	}
 }

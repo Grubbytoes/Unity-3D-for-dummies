@@ -1,9 +1,12 @@
 using System;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 
 public class InteractObject : MonoBehaviour
 {
+	public static event Action<string, bool> PopupText;
+
     private bool _isHighlighted;
     public bool IsHighlighted
     {
@@ -17,6 +20,8 @@ public class InteractObject : MonoBehaviour
     
 
     [SerializeField] protected SpriteRenderer billboard;
+    [SerializeField] protected string LongMessagePath;
+    [SerializeField] protected string ShortMessage;
 
     void Awake()
     {
@@ -37,5 +42,16 @@ public class InteractObject : MonoBehaviour
         if (!IsHighlighted) return;
 
         Debug.Log("I have been selected woop!");
+
+        if (LongMessagePath != "")
+        {
+            Debug.Log("Writing a long message");
+            PopupText.Invoke(LongMessagePath, true);
+        }
+        else if (ShortMessage != "")
+        {
+            Debug.Log("Writing a short message");
+            PopupText.Invoke(ShortMessage, false);
+        }
     }
 }
