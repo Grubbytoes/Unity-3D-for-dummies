@@ -1,4 +1,4 @@
-using System;
+using System.IO;
 using TMPro;
 using UnityEngine;
 
@@ -22,11 +22,15 @@ public class PlayerHUD : MonoBehaviour
         }        
     }   private int _tonicCount;
 
+    private static readonly string textFilePath = "Assets/Media/Text";
+
     [SerializeField] private TextMeshProUGUI GeodeCountMesh;
     [SerializeField] private TextMeshProUGUI TonicCountMesh;
+    [SerializeField] private TextMeshProUGUI LongMessageMesh;
 
     protected Animator anim;
     protected bool popupActive;
+    protected StreamReader textFileReader;
 
     void Awake()
     {
@@ -40,6 +44,28 @@ public class PlayerHUD : MonoBehaviour
 
     private void Popup(string text, bool asPath)
     {
+        // toggle
+        if (popupActive)
+        {
+            anim.SetTrigger("putPaperDown");
+            popupActive = false;
+            return;
+        }
+
+        // Set text
+        string popupText;
+        if (asPath)
+        {
+            textFileReader = new($"{textFilePath}/{text}.txt");
+            popupText = textFileReader.ReadToEnd();
+        }
+        else
+        {
+            popupText = text;
+        }
+
+        LongMessageMesh.text = popupText;
+
         anim.SetTrigger("putPaperUp");
         popupActive = true;
     }
@@ -49,6 +75,7 @@ public class PlayerHUD : MonoBehaviour
         if (!popupActive) return;
 
         anim.SetTrigger("putPaperDown");
+        popupActive = false;
     }
 
     public void OnItemPickedUp(string item)

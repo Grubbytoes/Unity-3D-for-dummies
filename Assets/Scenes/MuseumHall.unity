@@ -62439,7 +62439,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5265607805169865844, guid: 43c53b23efd3444379366848a47d8ad3, type: 3}
       propertyPath: ShortMessage
-      value: olrum ipsum
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5265607805169865844, guid: 43c53b23efd3444379366848a47d8ad3, type: 3}
+      propertyPath: LongMessagePath
+      value: test
       objectReference: {fileID: 0}
     - target: {fileID: 5711479769843893903, guid: 43c53b23efd3444379366848a47d8ad3, type: 3}
       propertyPath: m_Name

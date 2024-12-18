@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5888267822275049028}
   - component: {fileID: 6173074510260508674}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: Long Message
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -777,6 +777,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   GeodeCountMesh: {fileID: 1134963657536014576}
   TonicCountMesh: {fileID: 7721331166964175533}
+  LongMessageMesh: {fileID: 6173074510260508674}
 --- !u!95 &275419496851531949
 Animator:
   serializedVersion: 5
