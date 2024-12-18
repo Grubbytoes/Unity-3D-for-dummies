@@ -5,6 +5,6 @@ public class CellerRoomLogic : MonoBehaviour
 {    
     public void ExitToHall()
     {
-        SceneManager.LoadScene("MuseumHall");
+        GameSingleton.S.ChangeScene("Cellar", "MuseumHall");
     }
 }

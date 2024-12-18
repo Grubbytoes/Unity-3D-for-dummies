@@ -17,6 +17,15 @@ public class StupidFuckingAnimator : MonoBehaviour
     {
         anim.SetFloat("flickerOffset", offset);
         anim.SetFloat("flickerSpeed", 1+offset/2);
-        anim.SetBool("isFlickering", true);
+
+        if (GameSingleton.S.EnteredFrom == "Cellar")
+        {
+            Debug.Log("EVIL LIGHTING!!");
+            anim.SetBool("isEvil", true);
+        }
+        else
+        {
+            anim.SetBool("isFlickering", true);
+        }
     }
 }
