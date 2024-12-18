@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PosterAnim : MonoBehaviour
+public class PosterAnim : HighlightObject
 {
     protected AudioSource audioSource;
 

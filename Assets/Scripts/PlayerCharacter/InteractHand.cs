@@ -6,8 +6,8 @@ public class InteractHand : MonoBehaviour
 {
     public static event Action Select;
 
-    private InteractObject _highlighted;
-    public InteractObject Highlighted
+    private HighlightObject _highlighted;
+    public HighlightObject Highlighted
     {
         get
         {
@@ -28,14 +28,14 @@ public class InteractHand : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        var newObject = other.GetComponent<InteractObject>();
+        var newObject = other.GetComponent<HighlightObject>();
         if (newObject == null) return;
         Highlighted = newObject;
     }
 
     void OnTriggerExit(Collider other)
     {
-        var newObject = other.GetComponent<InteractObject>();
+        var newObject = other.GetComponent<HighlightObject>();
         if (newObject == null) return;
         if (newObject != Highlighted) return;
 

@@ -3,28 +3,9 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class InteractObject : MonoBehaviour
+public class InteractObject : HighlightObject
 {
 	public static event Action<string, bool> PopupText;
-	public static event Action<string> DisplayTooltip;
-
-    private bool _isHighlighted;
-    public bool IsHighlighted
-    {
-        get { return _isHighlighted; }
-        set 
-        { 
-            _isHighlighted = value;
-            billboard.enabled = value;
-
-            if (value) DisplayTooltip?.Invoke(tooltip);
-            else DisplayTooltip?.Invoke("");
-        }
-    }
-    
-
-    [SerializeField] protected SpriteRenderer billboard;
-    [SerializeField] protected string tooltip = "";
     [SerializeField] protected string LongMessagePath = "Not set";
     [SerializeField] protected string ShortMessage;
 
