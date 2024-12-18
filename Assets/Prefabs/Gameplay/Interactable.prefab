@@ -121,6 +121,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   billboard: {fileID: 2789373462520407097}
+  tooltip: Generic interactable object
+  LongMessagePath: 
+  ShortMessage: 
 --- !u!54 &592548027412556376
 Rigidbody:
   m_ObjectHideFlags: 0

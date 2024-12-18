@@ -1,3 +1,4 @@
+using System;
 using System.IO;
 using TMPro;
 using UnityEngine;
@@ -27,6 +28,7 @@ public class PlayerHUD : MonoBehaviour
     [SerializeField] private TextMeshProUGUI GeodeCountMesh;
     [SerializeField] private TextMeshProUGUI TonicCountMesh;
     [SerializeField] private TextMeshProUGUI LongMessageMesh;
+    [SerializeField] private TooltipPanel tooltipPanel;
 
     protected Animator anim;
     protected bool popupActive;
@@ -38,8 +40,12 @@ public class PlayerHUD : MonoBehaviour
         GeodeCount = 0;
         anim = GetComponent<Animator>();
 
+        // Subscribing to popup events
         InteractObject.PopupText += Popup;
         PlayerCharacter.UiEscape += EscapePopup;
+
+        // Subscribing to the tooltip event
+        InteractObject.DisplayTooltip += ShowTooltip;
     }
 
     private void Popup(string text, bool asPath)
@@ -76,6 +82,19 @@ public class PlayerHUD : MonoBehaviour
 
         anim.SetTrigger("putPaperDown");
         popupActive = false;
+    }
+
+    private void ShowTooltip(string tooltip)
+    {
+        if (tooltip == "")
+        {
+            Debug.Log("should be hiding tooltip panel...");
+            tooltipPanel.Hide();
+            return;
+        }
+
+        tooltipPanel.enabled = true;
+        tooltipPanel.Show(tooltip);
     }
 
     public void OnItemPickedUp(string item)
