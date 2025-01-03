@@ -21,6 +21,7 @@ public class PlayerCharacter : MonoBehaviour
 	public Transform ViewCamera;
 	
 	[SerializeField] protected InteractHand interactHand;
+	[SerializeField] protected bool IsDisabled = false;
 	protected Vector2 HorizontalInputDir;
 	protected Vector2 HorizontalMoveDir;
 	protected CharacterController CharControl;
@@ -47,8 +48,11 @@ public class PlayerCharacter : MonoBehaviour
 	}
 
 	// Apply a component along the XZ plane based on the horizontal input
+	// Returns early, before making any changes to _finalMovement, if IsDisabled;
 	private void ApplyHorizontalMovement()
 	{
+		if (IsDisabled) return;
+
 		var deltaSpeed = Time.deltaTime * MoveSpeed;
 		HorizontalMoveDir = Quaternion.Euler(0f, 0f, -ViewCamera.eulerAngles.y) * HorizontalInputDir;
 
@@ -66,8 +70,11 @@ public class PlayerCharacter : MonoBehaviour
 	}
 
 	// Applies upward velocity on the y axis, if a jump is queued (DoJump)
+	// Returns early, before making any changes to _finalMovement, if IsDisabled;
 	private void ApplyJump()
 	{
+		if (IsDisabled) return;
+
 		if (!DoJump) return;
 		DoJump = false;
 
