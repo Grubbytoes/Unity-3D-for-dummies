@@ -29,6 +29,7 @@ public class PlayerCharacter : MonoBehaviour
 
 	private float _verticalVelocity;
 	private Vector3 _finalMovement;
+	private bool _collectedEnoughAlready = false;
 
 	void Awake()
 	{
@@ -106,8 +107,25 @@ public class PlayerCharacter : MonoBehaviour
 		// For now, we'll go for 12 geodes and 3 tonics
 		if (Inventory.Has("geode", 1) && Inventory.Has("tonic", 1)) 
 		{
+			if (_collectedEnoughAlready) return;
 			CollectedEnoughItems();
+			_collectedEnoughAlready = true;
 		}
+		else
+		{
+			_collectedEnoughAlready = false;
+		}
+	}
+
+	public void DisableControl()
+	{
+		Debug.Log("My control has been disabled");
+		IsDisabled = true;
+	}
+
+	public void EnableControl()
+	{
+		IsDisabled = false;
 	}
 
 	// INPUT LISTENER METHODS
