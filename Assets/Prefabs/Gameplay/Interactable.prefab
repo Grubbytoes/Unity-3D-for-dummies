@@ -120,8 +120,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 66f29c9d00233482eaba6dbcc4d18196, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  billboard: {fileID: 2789373462520407097}
   tooltip: Generic interactable object
+  billboard: {fileID: 2789373462520407097}
   LongMessagePath: 
   ShortMessage: 
 --- !u!54 &592548027412556376

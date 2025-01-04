@@ -2320,7 +2320,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 592548027412556376, guid: 43c53b23efd3444379366848a47d8ad3, type: 3}
       propertyPath: m_IsKinematic
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 592548027412556376, guid: 43c53b23efd3444379366848a47d8ad3, type: 3}
       propertyPath: m_ImplicitTensor
