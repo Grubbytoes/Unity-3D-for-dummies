@@ -9,8 +9,8 @@ using UnityEngine.InputSystem;
 public class PlayerCharacter : MonoBehaviour
 {
 	public static event Action CollectedEnoughItems;
+	public static event Action UiEscape;
 
-	public UnityEvent TryInteract;
 	public UnityEvent<string> ItemPickedUp;
 
 	const float GravityStrength = 10;
@@ -20,6 +20,8 @@ public class PlayerCharacter : MonoBehaviour
 	public readonly ItemStore Inventory = new();
 	public Transform ViewCamera;
 	
+	[SerializeField] protected InteractHand interactHand;
+	[SerializeField] protected bool IsDisabled = false;
 	protected Vector2 HorizontalInputDir;
 	protected Vector2 HorizontalMoveDir;
 	protected CharacterController CharControl;
@@ -27,6 +29,7 @@ public class PlayerCharacter : MonoBehaviour
 
 	private float _verticalVelocity;
 	private Vector3 _finalMovement;
+	private bool _collectedEnoughAlready = false;
 
 	void Awake()
 	{
@@ -46,8 +49,11 @@ public class PlayerCharacter : MonoBehaviour
 	}
 
 	// Apply a component along the XZ plane based on the horizontal input
+	// Returns early, before making any changes to _finalMovement, if IsDisabled;
 	private void ApplyHorizontalMovement()
 	{
+		if (IsDisabled) return;
+
 		var deltaSpeed = Time.deltaTime * MoveSpeed;
 		HorizontalMoveDir = Quaternion.Euler(0f, 0f, -ViewCamera.eulerAngles.y) * HorizontalInputDir;
 
@@ -65,8 +71,11 @@ public class PlayerCharacter : MonoBehaviour
 	}
 
 	// Applies upward velocity on the y axis, if a jump is queued (DoJump)
+	// Returns early, before making any changes to _finalMovement, if IsDisabled;
 	private void ApplyJump()
 	{
+		if (IsDisabled) return;
+
 		if (!DoJump) return;
 		DoJump = false;
 
@@ -93,13 +102,30 @@ public class PlayerCharacter : MonoBehaviour
 	public virtual void OnCollect(Collectable collectable)
 	{
 		ItemPickedUp.Invoke(collectable.ItemName);
-
 		// Check whether we have collected enough
 		// For now, we'll go for 12 geodes and 3 tonics
 		if (Inventory.Has("geode", 1) && Inventory.Has("tonic", 1)) 
 		{
+			Debug.Log("Ready for cutscene!");
+			if (_collectedEnoughAlready) return;
 			CollectedEnoughItems();
+			_collectedEnoughAlready = true;
 		}
+		else
+		{
+			_collectedEnoughAlready = false;
+		}
+	}
+
+	public void DisableControl()
+	{
+		Debug.Log("My control has been disabled");
+		IsDisabled = true;
+	}
+
+	public void EnableControl()
+	{
+		IsDisabled = false;
 	}
 
 	// INPUT LISTENER METHODS
@@ -119,7 +145,16 @@ public class PlayerCharacter : MonoBehaviour
 	// Receives the call to interact
 	public void InteractInput(InputAction.CallbackContext ctx)
 	{
-		if (!ctx.started || !CharControl.isGrounded) return;
-		TryInteract.Invoke();
+		if (interactHand == null) return;
+		if (!ctx.started) return;
+
+		interactHand.SelectHighlightedObject();
+	}
+
+	// Receiver used for various UI bollocks
+	public void EscInput(InputAction.CallbackContext ctx)
+	{
+		if (!ctx.started) return;
+		UiEscape.Invoke();
 	}
 }

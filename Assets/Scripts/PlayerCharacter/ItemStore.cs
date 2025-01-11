@@ -1,8 +1,6 @@
 using System;
-using Unity;
 using System.Collections.Generic;
-using System.Diagnostics;
-using UnityEngine.AI;
+using UnityEngine;
 
 public class ItemStore
 {

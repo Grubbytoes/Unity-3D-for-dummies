@@ -10,7 +10,6 @@ public class SmallDoorway : MonoBehaviour
     void Start()
     {
         anim = GetComponent<Animator>();
-        PlayerCharacter.CollectedEnoughItems += OpenDoor;
     }
 
     public void TryGoThrough()
@@ -20,9 +19,8 @@ public class SmallDoorway : MonoBehaviour
         GameSingleton.S.ChangeScene("MuseumHall", "Cellar");
     }
 
-    private void OpenDoor()
+    public void OpenDoor()
     {
-        Debug.Log("Door has opened");
         anim.SetTrigger("openDoor");
         isOpen = true;
     }
