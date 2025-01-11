@@ -23,7 +23,7 @@ public class InteractObject : HighlightObject
         }
     }
 
-    private void OnSelect()
+    protected virtual void OnSelect()
     {
         if (!IsHighlighted) return;
 
