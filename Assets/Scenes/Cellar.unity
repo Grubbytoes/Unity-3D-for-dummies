@@ -6357,6 +6357,34 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 1437446772}
+    - target: {fileID: 8627295678260270076, guid: 434c5f219c2304fbcb293a2940f4350d, type: 3}
+      propertyPath: onPulled.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8627295678260270076, guid: 434c5f219c2304fbcb293a2940f4350d, type: 3}
+      propertyPath: onPulled.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8627295678260270076, guid: 434c5f219c2304fbcb293a2940f4350d, type: 3}
+      propertyPath: onPulled.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 93863255}
+    - target: {fileID: 8627295678260270076, guid: 434c5f219c2304fbcb293a2940f4350d, type: 3}
+      propertyPath: onPulled.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8627295678260270076, guid: 434c5f219c2304fbcb293a2940f4350d, type: 3}
+      propertyPath: onPulled.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: HitSwitch
+      objectReference: {fileID: 0}
+    - target: {fileID: 8627295678260270076, guid: 434c5f219c2304fbcb293a2940f4350d, type: 3}
+      propertyPath: onPulled.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: CellerRoomLogic, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 8627295678260270076, guid: 434c5f219c2304fbcb293a2940f4350d, type: 3}
+      propertyPath: onPulled.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

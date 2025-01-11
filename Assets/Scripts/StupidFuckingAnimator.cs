@@ -20,7 +20,6 @@ public class StupidFuckingAnimator : MonoBehaviour
 
         if (GameSingleton.S.EnteredFrom == "Cellar")
         {
-            Debug.Log("EVIL LIGHTING!!");
             anim.SetBool("isEvil", true);
         }
         else

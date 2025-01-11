@@ -7,4 +7,9 @@ public class CellerRoomLogic : MonoBehaviour
     {
         GameSingleton.S.ChangeScene("Cellar", "MuseumHall");
     }
+
+    public void HitSwitch()
+    {
+        GameSingleton.S.HitSwitch();
+    }
 }
