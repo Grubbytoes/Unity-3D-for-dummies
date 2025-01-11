@@ -89,7 +89,7 @@ public class PlayerHUD : MonoBehaviour
         if (tooltip == "")
         {
             Debug.Log("should be hiding tooltip panel...");
-            tooltipPanel.Hide();
+            if (tooltip != null) tooltipPanel.Hide();
             return;
         }
 

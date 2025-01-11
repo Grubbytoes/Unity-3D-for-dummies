@@ -5,7 +5,7 @@ using UnityEngine.UI;
 class TooltipPanel : MonoBehaviour
 {
     [SerializeField] protected TextMeshProUGUI textMesh;
-    protected Image image;
+    protected Image image; 
 
     void Awake()
     {
@@ -18,6 +18,8 @@ class TooltipPanel : MonoBehaviour
 
     public void Show(string s)
     {
+        if (image == null || textMesh == null) return;
+
         image.enabled = true;
         textMesh.enabled = true;
 
@@ -26,6 +28,8 @@ class TooltipPanel : MonoBehaviour
 
     public void Hide() 
     {
+        if (image == null || textMesh == null) return;
+
         image.enabled = false;
         textMesh.enabled = false;
     }
