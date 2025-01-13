@@ -12,6 +12,7 @@ public class MuseumHallLogic : MonoBehaviour
     void Start()
     {
         enemyDinosaur.SetActive(false);
+
         Debug.Log(GameSingleton.S.EnteredFrom);
 
         if (GameSingleton.S.EnteredFrom == "Cellar")

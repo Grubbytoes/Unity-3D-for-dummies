@@ -11,6 +11,11 @@ public class DinosaurEnemy : BaseCharacter
         MoveCycle();
     }
 
+    public void PlayerCaught()
+    {
+        Debug.Log("I have caught the player!");
+    }
+
     private Vector2 CalculateMoveDir()
     {
         var thisPosition = GetComponent<Transform>().position;
