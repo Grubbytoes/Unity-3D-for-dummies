@@ -3,17 +3,14 @@ using System;
 
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.AI;
 using UnityEngine.InputSystem;
 
-public class PlayerCharacter : MonoBehaviour
+public class PlayerCharacter : BaseCharacter
 {
 	public static event Action CollectedEnoughItems;
 	public static event Action UiEscape;
 
 	public UnityEvent<string> ItemPickedUp;
-
-	const float GravityStrength = 10;
 
 	public float JumpPower = 5;
 	public float MoveSpeed = 5;
@@ -25,28 +22,20 @@ public class PlayerCharacter : MonoBehaviour
 	[SerializeField] protected bool IsDisabled = false;
 	protected Vector2 HorizontalInputDir;
 	protected Vector2 HorizontalMoveDir;
-	protected CharacterController CharControl;
 	protected bool DoJump;
 
-	private float _verticalVelocity;
-	private Vector3 _finalMovement;
 	private bool _collectedEnoughAlready = false;
-
-	void Awake()
-	{
-		CharControl = GetComponent<CharacterController>();
-	}
 
 	void Update()
 	{
-		_finalMovement = Vector3.zero;
+		finalMovement = Vector3.zero;
 
 		ApplyHorizontalMovement();
 		ApplyRotation();
 		ApplyJump();
 		ApplyGravity();
 
-		CharControl.Move(_finalMovement);
+		CharControl.Move(finalMovement);
 
 		SfxCycle();
 	}
@@ -60,8 +49,8 @@ public class PlayerCharacter : MonoBehaviour
 		var deltaSpeed = Time.deltaTime * MoveSpeed;
 		HorizontalMoveDir = Quaternion.Euler(0f, 0f, -ViewCamera.eulerAngles.y) * HorizontalInputDir;
 
-		_finalMovement.x += HorizontalMoveDir.x * deltaSpeed;
-		_finalMovement.z += HorizontalMoveDir.y * deltaSpeed;
+		finalMovement.x += HorizontalMoveDir.x * deltaSpeed;
+		finalMovement.z += HorizontalMoveDir.y * deltaSpeed;
 	}
 
 	// Rotates the character such that they are facing towards the direction of travel
@@ -82,23 +71,8 @@ public class PlayerCharacter : MonoBehaviour
 		if (!DoJump) return;
 		DoJump = false;
 
-		_verticalVelocity = JumpPower;
-		_finalMovement.y += JumpPower * Time.deltaTime;
-	}
-
-	// Applies downward acceleration when airborne
-	private void ApplyGravity()
-	{
-		if (CharControl.isGrounded && _verticalVelocity < 0f)
-		{
-			_verticalVelocity = -1;
-		}
-		else
-		{
-			_verticalVelocity -= GravityStrength * Time.deltaTime;
-		}
-
-		_finalMovement.y += _verticalVelocity * Time.deltaTime;
+		verticalMovement = JumpPower;
+		finalMovement.y += JumpPower * Time.deltaTime;
 	}
 
 	private float _footstepTime = 0.5f;
