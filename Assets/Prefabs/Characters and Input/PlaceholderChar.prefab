@@ -128,6 +128,7 @@ Transform:
   - {fileID: 2403428422900187028}
   - {fileID: 8111498696644309579}
   - {fileID: 8867509798688493292}
+  - {fileID: 674144040682651387}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &6077866170131818519
@@ -148,7 +149,9 @@ MonoBehaviour:
   JumpPower: 5
   MoveSpeed: 5
   ViewCamera: {fileID: 0}
+  sfxNoisemaker: {fileID: 8426544392988466010}
   interactHand: {fileID: 2033315546124500731}
+  IsDisabled: 0
 --- !u!143 &6332349666527973276
 CharacterController:
   m_ObjectHideFlags: 0
@@ -315,3 +318,80 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 51fb6f97fca124af0b505a8a3e1c1af7, type: 3}
   m_PrefabInstance: {fileID: 2796744266976041087}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &3899514114431962016
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 6506646916288031225}
+    m_Modifications:
+    - target: {fileID: 1686722365481381738, guid: 7cc689f05ef94481eb8c1a0279237967, type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: c17e31b0655c24fd8b89067353d67525, type: 3}
+    - target: {fileID: 4559561487248733531, guid: 7cc689f05ef94481eb8c1a0279237967, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.26486492
+      objectReference: {fileID: 0}
+    - target: {fileID: 4559561487248733531, guid: 7cc689f05ef94481eb8c1a0279237967, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.72193354
+      objectReference: {fileID: 0}
+    - target: {fileID: 4559561487248733531, guid: 7cc689f05ef94481eb8c1a0279237967, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 3.629527
+      objectReference: {fileID: 0}
+    - target: {fileID: 4559561487248733531, guid: 7cc689f05ef94481eb8c1a0279237967, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4559561487248733531, guid: 7cc689f05ef94481eb8c1a0279237967, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4559561487248733531, guid: 7cc689f05ef94481eb8c1a0279237967, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4559561487248733531, guid: 7cc689f05ef94481eb8c1a0279237967, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4559561487248733531, guid: 7cc689f05ef94481eb8c1a0279237967, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4559561487248733531, guid: 7cc689f05ef94481eb8c1a0279237967, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4559561487248733531, guid: 7cc689f05ef94481eb8c1a0279237967, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8783530156475739097, guid: 7cc689f05ef94481eb8c1a0279237967, type: 3}
+      propertyPath: m_Name
+      value: Noisemaker
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 7cc689f05ef94481eb8c1a0279237967, type: 3}
+--- !u!4 &674144040682651387 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4559561487248733531, guid: 7cc689f05ef94481eb8c1a0279237967, type: 3}
+  m_PrefabInstance: {fileID: 3899514114431962016}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &8426544392988466010 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4822442709332906234, guid: 7cc689f05ef94481eb8c1a0279237967, type: 3}
+  m_PrefabInstance: {fileID: 3899514114431962016}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2aff51e9c81b34308a2c40d21c6da615, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

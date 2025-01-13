@@ -19,6 +19,7 @@ public class PlayerCharacter : MonoBehaviour
 	public float MoveSpeed = 5;
 	public readonly ItemStore Inventory = new();
 	public Transform ViewCamera;
+	public Noisemaker sfxNoisemaker;
 	
 	[SerializeField] protected InteractHand interactHand;
 	[SerializeField] protected bool IsDisabled = false;
@@ -46,6 +47,8 @@ public class PlayerCharacter : MonoBehaviour
 		ApplyGravity();
 
 		CharControl.Move(_finalMovement);
+
+		SfxCycle();
 	}
 
 	// Apply a component along the XZ plane based on the horizontal input
@@ -96,6 +99,26 @@ public class PlayerCharacter : MonoBehaviour
 		}
 
 		_finalMovement.y += _verticalVelocity * Time.deltaTime;
+	}
+
+	private float _footstepTime = 0.5f;
+	private void SfxCycle()
+	{
+		if (HorizontalInputDir.magnitude == 0)
+		{
+			_footstepTime = 0;
+			return;
+		}
+		else  
+		{
+			_footstepTime -= Time.deltaTime;
+		}
+
+		if (_footstepTime <= 0  && CharControl.isGrounded)
+		{
+			_footstepTime = 0.5f;
+			sfxNoisemaker.MakeNoise(0);
+		}
 	}
 
 	// Called upon picking up a collectable
