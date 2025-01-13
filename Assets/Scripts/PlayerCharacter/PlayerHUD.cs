@@ -24,6 +24,7 @@ public class PlayerHUD : MonoBehaviour
     }   private int _tonicCount;
 
     private static readonly string textFilePath = "Assets/Media/Text";
+    public Noisemaker paperSfx;
 
     [SerializeField] private TextMeshProUGUI GeodeCountMesh;
     [SerializeField] private TextMeshProUGUI TonicCountMesh;
@@ -50,6 +51,9 @@ public class PlayerHUD : MonoBehaviour
 
     private void Popup(string text, bool asPath)
     {
+        // Play sfx
+        paperSfx.MakeNoise();
+
         // toggle
         if (popupActive)
         {

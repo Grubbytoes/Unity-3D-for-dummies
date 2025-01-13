@@ -1,8 +1,11 @@
 using UnityEngine;
+using UnityEngine.Rendering;
 
 // God have mercy on me a sinner, I am loosing my mind
 public class SmallDoorway : MonoBehaviour
 {
+    public Noisemaker sfxNoisemaker;
+
     protected Animator anim;
     protected bool isOpen;
 
@@ -23,5 +26,10 @@ public class SmallDoorway : MonoBehaviour
     {
         anim.SetTrigger("openDoor");
         isOpen = true;
+    }
+
+    public void MakeNoise(int idx)
+    {
+        sfxNoisemaker.MakeNoise(idx);
     }
 }
