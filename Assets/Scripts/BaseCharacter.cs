@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class BaseCharacter : MonoBehaviour
@@ -8,7 +9,7 @@ public class BaseCharacter : MonoBehaviour
     public float moveSpeed = 5;
     public float footstepTime = 0.5f;
     public bool movementDisabled = false;
-	public Noisemaker footstepNoisemaker;
+    public Noisemaker footstepNoisemaker;
 
     protected CharacterController CharControl;
     protected bool DoJump;
@@ -18,12 +19,35 @@ public class BaseCharacter : MonoBehaviour
     private float verticalMovement;
     private Vector3 finalMovement;
     private float _currentFootstepT;
+    private float pushPower = 2.0f;
+
 
 
     void Awake()
     {
         _currentFootstepT = footstepTime;
         CharControl = GetComponent<CharacterController>();
+    }
+
+    void OnControllerColliderHit(ControllerColliderHit hit)
+    {
+        Rigidbody body = hit.collider.attachedRigidbody;
+
+        // no rigidbody
+        if (body == null || body.isKinematic)
+        {
+            return;
+        }
+
+        // Calculate push direction from move direction,
+        // we only push objects to the sides never up and down
+        Vector3 pushDir = new Vector3(hit.moveDirection.x, 0, hit.moveDirection.z);
+
+        // If you know how fast your character is trying to move,
+        // then you can also multiply the push velocity by that.
+
+        // Apply the push
+        body.velocity = pushDir * pushPower;
     }
 
     public void DisableControl()

@@ -6,15 +6,15 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Cellar.unity
-    guid: 2f2e051732d694dfbb9bd4597791e934
+    path: Assets/Scenes/Intro.unity
+    guid: 87bf9b3722e3c46e5ad58258fd0e0413
   - enabled: 1
     path: Assets/Scenes/MuseumHall.unity
     guid: 9ca3a1ac06a96784fb94a86f7f9fc4c9
   - enabled: 1
+    path: Assets/Scenes/Cellar.unity
+    guid: 2f2e051732d694dfbb9bd4597791e934
+  - enabled: 1
     path: Assets/Scenes/Death.unity
     guid: 0a0c674222b264a428bc8ce6ef1a310b
-  - enabled: 1
-    path: Assets/Scenes/Intro.unity
-    guid: 87bf9b3722e3c46e5ad58258fd0e0413
   m_configObjects: {}

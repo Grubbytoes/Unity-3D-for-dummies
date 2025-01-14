@@ -32,7 +32,7 @@ public class PlayerCharacter : BaseCharacter
 		ItemPickedUp.Invoke(collectable.ItemName);
 		// Check whether we have collected enough
 		// For now, we'll go for 12 geodes and 3 tonics
-		if (Inventory.Has("geode", 1) && Inventory.Has("tonic", 1)) 
+		if (Inventory.Has("geode", 12) && Inventory.Has("tonic", 3)) 
 		{
 			Debug.Log("Ready for cutscene!");
 			if (_collectedEnoughAlready) return;
