@@ -71,6 +71,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ace61edb9a91245deae3c0955fb70284, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sfxNoisemaker: {fileID: 0}
 --- !u!82 &711699769621484205
 AudioSource:
   m_ObjectHideFlags: 0

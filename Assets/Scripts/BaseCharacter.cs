@@ -6,18 +6,23 @@ public class BaseCharacter : MonoBehaviour
 
     public float jumpPower = 5;
     public float moveSpeed = 5;
+    public float footstepTime = 0.5f;
     public bool movementDisabled = false;
+	public Noisemaker footstepNoisemaker;
 
     protected CharacterController CharControl;
     protected bool DoJump;
     protected Vector2 intendedMoveDir;
-    
+
     private Vector2 actualMoveDir;
     private float verticalMovement;
     private Vector3 finalMovement;
+    private float _currentFootstepT;
+
 
     void Awake()
     {
+        _currentFootstepT = footstepTime;
         CharControl = GetComponent<CharacterController>();
     }
 
@@ -38,10 +43,30 @@ public class BaseCharacter : MonoBehaviour
         ApplyHorizontalMovement();
         ApplyGravity();
         ApplyJump();
-		ApplyRotation();
+        ApplyRotation();
 
         CharControl.Move(finalMovement);
     }
+
+    protected void SfxCycle()
+    {
+        if (intendedMoveDir.magnitude == 0)
+        {
+            _currentFootstepT = 0;
+            return;
+        }
+        else
+        {
+            _currentFootstepT -= Time.deltaTime;
+        }
+
+        if (_currentFootstepT <= 0 && CharControl.isGrounded)
+        {
+            _currentFootstepT = footstepTime;
+            footstepNoisemaker.MakeNoise(0);
+        }
+    }
+
 
     // Apply a component along the XZ plane based on the horizontal input
     // Returns early, before making any changes to _finalMovement, if IsDisabled;

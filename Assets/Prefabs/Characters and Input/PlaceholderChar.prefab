@@ -143,15 +143,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dfcba026af459434ea484b9879a513cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  jumpPower: 5
+  moveSpeed: 5
+  footstepTime: 0.5
+  movementDisabled: 0
+  footstepNoisemaker: {fileID: 8426544392988466010}
   ItemPickedUp:
     m_PersistentCalls:
       m_Calls: []
-  JumpPower: 5
-  MoveSpeed: 5
   ViewCamera: {fileID: 0}
-  sfxNoisemaker: {fileID: 8426544392988466010}
   interactHand: {fileID: 2033315546124500731}
-  IsDisabled: 0
 --- !u!143 &6332349666527973276
 CharacterController:
   m_ObjectHideFlags: 0

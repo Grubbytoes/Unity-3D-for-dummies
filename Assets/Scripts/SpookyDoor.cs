@@ -9,6 +9,11 @@ class SpookyDoor : MonoBehaviour
     void Awake()
     {
         anim = GetComponent<Animator>();
+
+        if (GameSingleton.S.SwitchHit) 
+        {
+            anim.SetBool("open", true);
+        }
     }
 
     // TODO maybe make this a bit less obviously looping?

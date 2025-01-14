@@ -9,11 +9,13 @@ public class DinosaurEnemy : BaseCharacter
         intendedMoveDir = CalculateMoveDir() * moveSpeed;
 
         MoveCycle();
+        SfxCycle();
     }
 
     public void PlayerCaught()
     {
         Debug.Log("I have caught the player!");
+        GameSingleton.S.ChangeScene("MuseumHall", "Death");
     }
 
     private Vector2 CalculateMoveDir()

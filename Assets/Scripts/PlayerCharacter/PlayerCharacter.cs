@@ -14,7 +14,6 @@ public class PlayerCharacter : BaseCharacter
 
 	public readonly ItemStore Inventory = new();
 	public Transform ViewCamera;
-	public Noisemaker sfxNoisemaker;
 	
 	[SerializeField] protected InteractHand interactHand;
 
@@ -25,26 +24,6 @@ public class PlayerCharacter : BaseCharacter
 	{
 		MoveCycle();
 		SfxCycle();
-	}
-
-	private float _footstepTime = 0.5f;
-	private void SfxCycle()
-	{
-		if (intendedMoveDir.magnitude == 0)
-		{
-			_footstepTime = 0;
-			return;
-		}
-		else  
-		{
-			_footstepTime -= Time.deltaTime;
-		}
-
-		if (_footstepTime <= 0  && CharControl.isGrounded)
-		{
-			_footstepTime = 0.5f;
-			sfxNoisemaker.MakeNoise(0);
-		}
 	}
 
 	// Called upon picking up a collectable
