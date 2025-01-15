@@ -5,9 +5,11 @@ using UnityEngine.Events;
 
 public class InteractObject : HighlightObject
 {
-	public static event Action<string, bool> PopupText;
-    [SerializeField] protected string LongMessagePath = "Not set";
-    [SerializeField] protected string ShortMessage;
+	public static event Action<string> PopupText;
+
+    [TextAreaAttribute]
+    [SerializeField] 
+    protected string ShortMessage;
 
     void Awake()
     {
@@ -27,17 +29,9 @@ public class InteractObject : HighlightObject
     {
         if (!IsHighlighted) return;
 
-        Debug.Log("I have been selected woop!");
-
-        if (LongMessagePath != "")
-        {
-            Debug.Log("Writing a long message");
-            PopupText.Invoke(LongMessagePath, true);
-        }
         else if (ShortMessage != "")
         {
-            Debug.Log("Writing a short message");
-            PopupText.Invoke(ShortMessage, false);
+            PopupText.Invoke(ShortMessage);
         }
     }
 }

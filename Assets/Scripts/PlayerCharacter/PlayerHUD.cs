@@ -49,7 +49,7 @@ public class PlayerHUD : MonoBehaviour
         InteractObject.DisplayTooltip += ShowTooltip;
     }
 
-    private void Popup(string text, bool asPath)
+    private void Popup(string text)
     {
         // Play sfx
         paperSfx.MakeNoise();
@@ -63,17 +63,7 @@ public class PlayerHUD : MonoBehaviour
         }
 
         // Set text
-        string popupText;
-        if (asPath)
-        {
-            textFileReader = new($"{textFilePath}/{text}.txt");
-            popupText = textFileReader.ReadToEnd();
-        }
-        else
-        {
-            popupText = text;
-        }
-
+        string popupText = text;
         LongMessageMesh.text = popupText;
 
         anim.SetTrigger("putPaperUp");

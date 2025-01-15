@@ -2675,11 +2675,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1304019151109864346, guid: cb697c9b985ab455aaa986d6a2684cb9, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.3995128
+      value: -1.8995128
       objectReference: {fileID: 0}
     - target: {fileID: 1304019151109864346, guid: cb697c9b985ab455aaa986d6a2684cb9, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 4
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1304019151109864346, guid: cb697c9b985ab455aaa986d6a2684cb9, type: 3}
       propertyPath: m_LocalRotation.w
@@ -14277,7 +14277,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4280444141519847382, guid: 470abbd763aea4781a3d8792905e2e62, type: 3}
       propertyPath: ShortMessage
-      value: 
+      value: "Such a glorious specimen. Megalosaurus Bucklandii, scarcely a bone
+        or tooth missing, and all that is there set in its perfect place. As I found
+        it, so lifelike was its articulation that I fancied were I to put my ear
+        against its petrified form, I would hear the beating of its ancient and terrible
+        heart.\n\nIt has been bought here, to Rexhill Hall; a dusty and forlorn place
+        I inherited from some distant, widowed relative and scarcely knew or cared
+        what use I might make of it. The College does not know what I have found.
+        They cannot know\u2014not yet."
       objectReference: {fileID: 0}
     - target: {fileID: 4280444141519847382, guid: 470abbd763aea4781a3d8792905e2e62, type: 3}
       propertyPath: LongMessagePath
@@ -28008,6 +28015,25 @@ PrefabInstance:
     - target: {fileID: 1725502157125385922, guid: 470abbd763aea4781a3d8792905e2e62, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4280444141519847382, guid: 470abbd763aea4781a3d8792905e2e62, type: 3}
+      propertyPath: tooltip
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4280444141519847382, guid: 470abbd763aea4781a3d8792905e2e62, type: 3}
+      propertyPath: ShortMessage
+      value: "Humanity thinks we are the kings of this world. Maybe. \n\nBut kings
+        fall\u2014they are overthrown and forgotten; their names pass into myth and
+        song, which themselves last only as long as there is anyone to sing them.
+        Few outlive their kingdom, and no kingdom outlives the Earth upon which it
+        is built. Earth, Gaia, she makes a mockery of kings.\n\nPerhaps I have gazed
+        too long into the hollow eyes of forgotten monsters. Did they not, too, consider
+        themselves the masters of their world? Did they think themselves the sole
+        inheritors and scholars of all around them? Now we dig up their fossilized
+        bodies and make of them exhibits and trinkets and call ourselves the scholars.\n\nI
+        am weary and have been made humble. I have listened to the Mouth of Gaia
+        and am at peace with her words. Before her, all your gods are forgotten,
+        and all your monsters are slain."
       objectReference: {fileID: 0}
     - target: {fileID: 4280444141519847382, guid: 470abbd763aea4781a3d8792905e2e62, type: 3}
       propertyPath: LongMessagePath
@@ -56825,8 +56851,18 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4280444141519847382, guid: 470abbd763aea4781a3d8792905e2e62, type: 3}
-      propertyPath: ShortMessage
+      propertyPath: tooltip
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4280444141519847382, guid: 470abbd763aea4781a3d8792905e2e62, type: 3}
+      propertyPath: ShortMessage
+      value: "I have made a grave mistake. I believed there was a way the specimen
+        could be woken from the slumber of time, but in my folly I have created a
+        waking nightmare. It is locked away with the rest of the dark, forgotten,
+        and foolish things. I pray it stays there.\n\nI must pause my studies\u2014I
+        have become hasty and arrogant and forgotten my place in the world\u2014if
+        I ever truly knew it. It is not my lot to challenge nature. I will meditate
+        on my transgression. "
       objectReference: {fileID: 0}
     - target: {fileID: 4280444141519847382, guid: 470abbd763aea4781a3d8792905e2e62, type: 3}
       propertyPath: LongMessagePath
@@ -74091,6 +74127,21 @@ PrefabInstance:
     - target: {fileID: 1725502157125385922, guid: 470abbd763aea4781a3d8792905e2e62, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4280444141519847382, guid: 470abbd763aea4781a3d8792905e2e62, type: 3}
+      propertyPath: tooltip
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4280444141519847382, guid: 470abbd763aea4781a3d8792905e2e62, type: 3}
+      propertyPath: ShortMessage
+      value: "The Amber Imperial College... I would not wish to speak ill of my colleagues
+        were my colleagues not fools. I fear the Empire's hunger for power has infected
+        too many of them. Every new discovery, every new angle of thought, is viewed
+        only as a vessel for political gain.\n\nWhat became of the love for knowledge?
+        Understanding for understanding's sake\u2014is that not the mandate of a
+        scientist? There are days when I truly believe I am the last one who believes
+        that\u2014perhaps that is why I question my sanity...\n\nImbeciles, all of
+        them..."
       objectReference: {fileID: 0}
     - target: {fileID: 4280444141519847382, guid: 470abbd763aea4781a3d8792905e2e62, type: 3}
       propertyPath: LongMessagePath
