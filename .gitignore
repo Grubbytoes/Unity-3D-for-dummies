@@ -5,7 +5,10 @@
 
 # MY STUFF
 Assets/Media/Texture*
-Assets/Media/Sound*
+Assets/Media/Audio*
+Assets/Media/Videos*
+Assets/Media/Modles*
+Assets/Media/Sprites*
 # MY STUFF ENDS
 
 /[Ll]ibrary/
