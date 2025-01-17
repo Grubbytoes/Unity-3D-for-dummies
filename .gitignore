@@ -9,6 +9,8 @@ Assets/Media/Audio*
 Assets/Media/Videos*
 Assets/Media/Modles*
 Assets/Media/Sprites*
+
+!*.meta
 # MY STUFF ENDS
 
 /[Ll]ibrary/
