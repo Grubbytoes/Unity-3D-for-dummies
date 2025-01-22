@@ -49,7 +49,9 @@ public class PlayerCharacter : BaseCharacter
 	// Receives the Vector2 representing the players arrow key input, rotated by the view angle
 	public void HorizontalInput(InputAction.CallbackContext ctx)
 	{
-		intendedMoveDir = Quaternion.Euler(0f, 0f, -ViewCamera.eulerAngles.y) * ctx.ReadValue<Vector2>();
+        Vector2 v = ctx.ReadValue<Vector2>();
+				v = Quaternion.Euler(0f, 0f, -ViewCamera.eulerAngles.y) * v;
+        intendedMoveDir = v;
 	}
 
 	// Receives the call to jump

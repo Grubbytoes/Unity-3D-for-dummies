@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class StupidFuckingAnimator : MonoBehaviour
+public class LampAnimator : MonoBehaviour
 {
     public Animator anim;
     protected float offset;

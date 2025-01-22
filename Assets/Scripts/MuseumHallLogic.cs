@@ -17,8 +17,8 @@ public class MuseumHallLogic : MonoBehaviour
 
         if (GameSingleton.S.EnteredFrom == "Cellar")
         {
-            // playerCharacter.transform.position = altSpawn.position; // I have no clue why this does not work
-            // playerCharacter.transform.rotation = altSpawn.rotation;
+            playerCharacter.transform.position = altSpawn.position; // I have no clue why this does not work
+            playerCharacter.transform.rotation = altSpawn.rotation;
             if (GameSingleton.S.SwitchHit) PostHitSwitch();
         }
         else 
